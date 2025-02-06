@@ -1,10 +1,38 @@
 # MeliExpress
 
+Clon de MercadoLibre usando React.js y Next.js para buscar, visualizar y guardar (como favoritos) productos.
+
+## UI
+
+...
+
+### UI TODOs
+
+- [ ] Search Bar
+- [ ] Search Results
+- [ ] Product Detail
+- [ ] Favorites
+- [ ] Loading Skeletons
+- [ ] Error Handling
+- [ ] Debounce Search Bar Previews
+- [ ] I18N / Tropicalization (?)
+
 ## API
+
+Por agilidad se usará el mismo App Router de Next.js para generar la API intermedia entre MercadoLibre y MeliExpress.
+
+### API TODOs
+
+- [ ] API Hardcodeada pata Search y Product Detail
+- [ ] Conectar la API de MercadoLibre
+- [ ] API Hardcodeada para Favoritos
+- [ ] SQLite para guardar Favoritos (?)
+
+### Transformations
 
 Required data transformations to pass from MercadoLibre API to MeliExpress API.
 
-### Search
+#### Search
 
 - author -- hardcoded
 - categories -- [...filters[id===category].values[0?].path_from_root]
@@ -18,7 +46,7 @@ Required data transformations to pass from MercadoLibre API to MeliExpress API.
   - condition "String -- .condition
   - free_shipping "Boolean" -- .shipping.free_shipping
 
-### Product Detail
+#### Product Detail
 
 - author -- hardcoded
 - item
