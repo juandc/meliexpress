@@ -24,9 +24,9 @@ export const BaseContent: FC<Props> = ({
           {breadcrumb}
         </div>
       )}
-      <div className={contentClasses}>
+      <section className={contentClasses}>
         {children}
-      </div>
+      </section>
     </>
   );
 };
