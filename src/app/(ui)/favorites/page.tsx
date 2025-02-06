@@ -1,5 +1,9 @@
-export default function Home() {
+import { BaseContent } from "@/components/isomorphic";
+
+export default function SearchPage() {
   return (
-    "Empty Favorites"
+    <BaseContent>
+      Favorite items...
+    </BaseContent>
   );
 }

@@ -1,6 +1,6 @@
-:root {
-  /* CSS Vars */
-}
+/* CSS VARS */
+/* :root {
+} */
 
 /* @media (prefers-color-scheme: dark) {
   :root {
@@ -14,4 +14,19 @@
   box-sizing: border-box;
   padding: 0;
   margin: 0;
+}
+
+html, body {
+  background-color: #eee;
+  color: #333;
+  font-family: var(--font-geist-sans);
+  display: flex;
+  flex-direction: column;
+  min-height: 100dvh;
+}
+
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
 }

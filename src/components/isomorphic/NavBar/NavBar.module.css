@@ -1,0 +1,45 @@
+.NavBar {
+  background-color: #FFE600;
+  height: 50px;
+}
+
+.NavBar_innerContainer {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  gap: .75rem;
+  position: relative;
+  margin: .5rem auto;
+  max-height: 100%;
+  width: calc(100% - 1rem); /* TODO: duplicated for searchbar and basecontent, move into a mixin or something */
+  max-width: 1024px;
+}
+
+@media (min-width: 768px) {
+  .NavBar_innerContainer {
+    width: calc(100% - 4rem);
+  }
+}
+
+@media (min-width: 1024px) {
+  .NavBar_innerContainer {
+    width: calc(100% - 8rem);
+  }
+}
+
+@media (min-width: 1248px) {
+  .NavBar_innerContainer {
+    width: calc(100% - 16rem);
+    max-width: 1248px;
+  }
+}
+
+.NavBar_innerContainer img {
+  height: calc(50px - 1.5rem);
+  width: auto;
+}
+
+.NavBar_innerContainer input {
+  flex: 1;
+}

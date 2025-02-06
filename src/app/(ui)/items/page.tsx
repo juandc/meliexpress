@@ -1,5 +1,13 @@
-export default function Home() {
+import { BaseContent } from "@/components/isomorphic";
+
+export default function SearchPage() {
   return (
-    "Empty Results"
+    <BaseContent
+      breadcrumb={(
+        "breadcrumb"
+      )}
+    >
+      Search items...
+    </BaseContent>
   );
 }
