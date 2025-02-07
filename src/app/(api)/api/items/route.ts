@@ -48,14 +48,25 @@ export function transformSearchResults(data: any): SearchApi {
 export async function GET(request: NextRequest): Promise<NextResponse<SearchApi>> {
   try {
     const query = request.nextUrl.searchParams.get("q");
-    if (!query) throw new Error("Not query in items search")
+    if (!query) {
+      return NextResponse.json({
+        data: null,
+        error: "Not query in items search",
+      }, { status: 400 });
+    }
     const data = await originalSearchResults(query);
+    if (!data?.results?.length) {
+      return NextResponse.json({
+        data: null,
+        error: "Not Found",
+      }, { status: 404 });
+    }
     const searchData = transformSearchResults(data);
     return NextResponse.json(searchData);
   } catch(error) {
     return NextResponse.json({
       data: null,
       error: (error as unknown as Error).message,
-    });
+    }, { status: 500 });
   }
 }
