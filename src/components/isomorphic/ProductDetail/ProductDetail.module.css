@@ -1,0 +1,121 @@
+.ProductDetail {
+  position: relative;
+}
+
+@media (min-width: 768px) {
+  .ProductDetail {
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ProductDetail {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 2rem;
+  }
+}
+
+.ProductDetail_picture {
+  position: relative;
+  margin: 0 auto;
+  height: 100%;
+  width: 100%;
+  max-width: 453px;
+}
+
+.ProductDetail_picture img {
+  border-radius: 4px;
+  height: auto;
+  width: 100%;
+  max-width: 100%;
+}
+
+@media (min-width: 1024px) {
+  .ProductDetail_picture {
+    margin: 0;
+    width: calc(65% - 1rem);
+    max-width: 680px;
+  }
+}
+
+.ProductDetail_data {
+  margin: 1.625rem auto 0;
+  max-width: 680px;
+}
+
+.ProductDetail_attrs {
+  font-size: 14px;
+  font-weight: 400;
+  margin-bottom: .5rem;
+}
+.ProductDetail_title {
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-wrap: pretty;
+  margin-bottom: 1rem;
+}
+.ProductDetail_price {
+  font-size: 2.125rem;
+  font-weight: 400;
+  margin-bottom: 1.25rem;
+}
+.ProductDetail_data button {
+  width: 100%;
+}
+
+@media (min-width: 768px) {
+  .ProductDetail_data button {
+    width: 20rem;
+  }
+}
+
+@media (min-width: 1024px) {
+  .ProductDetail_data {
+    margin: 0 0 0 auto;
+    padding-right: 2rem;
+    min-width: calc(35% - 1rem);
+    width: calc(100% - 680px - 2rem);
+    max-width: 453px;
+  }
+  .ProductDetail_attrs {
+    margin-bottom: 1rem;
+  }
+  .ProductDetail_title {
+    margin-bottom: 2rem;
+  }
+  .ProductDetail_price {
+    font-size: 2.875rem;
+    margin-bottom: 2rem;
+  }
+  .ProductDetail_data button {
+    width: 100%;
+  }
+}
+
+.ProductDetail_desc {
+  margin: 0 auto;
+  padding-top: 2.5rem;
+  max-width: 680px;
+}
+.ProductDetail_desc h2 {
+  font-size: 28px;
+  margin-bottom: 1rem;
+}
+.ProductDetail_desc p {
+  font-size: 1rem;
+  overflow: auto;
+}
+.ProductDetail_desc p:not(:last-child) {
+  margin-bottom: .5rem;
+}
+
+@media (min-width: 1024px) {
+  .ProductDetail_desc {
+    margin: 0;
+    padding-top: 5rem;
+  }
+  .ProductDetail_desc h2 {
+    margin-bottom: 2rem;
+  }
+}

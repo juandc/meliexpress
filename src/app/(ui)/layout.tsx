@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
+import { Geist, Geist_Mono } from "next/font/google"; // TODO: change to one of these: https://similarfont.io/4-google-fonts-similar-to-proxima-nova
 import { NavBarContainer } from "@/containers/NavBarContainer";
 import "./globals.css";
 

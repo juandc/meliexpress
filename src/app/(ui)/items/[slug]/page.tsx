@@ -1,4 +1,4 @@
-import { BaseContent } from "@/components/isomorphic";
+import { BaseContent, ProductDetail } from "@/components/isomorphic";
 import { getItem } from "@/services/getItem";
 import { notFound } from "next/navigation";
 
@@ -24,7 +24,7 @@ export default async function ItemPage(props: NextProps) {
         "breadcrumb"
       )}
     >
-      <pre><code>{JSON.stringify(data.item, null, 1)}</code></pre>
+      <ProductDetail {...data.item} />
     </BaseContent>
   );
 }
