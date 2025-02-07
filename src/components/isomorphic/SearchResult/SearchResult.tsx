@@ -21,6 +21,7 @@ export const SearchResult: FC<Props> = ({
         <div className={classes.SearchResult_dataPrincipal}>
           <div className={classes.SearchResult_dataPrincipalTop}>
             <p>$ {props.price.amount}</p>
+            {/* TODO: use Intl for price format */}
             {props.free_shipping && (
               <img src="/ic_shipping@2x.png" alt="Free Shipping" />
             )}
