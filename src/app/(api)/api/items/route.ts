@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import type { SearchApi } from "@/types";
+import type { BaseItem, SearchApi } from "@/types";
 import { authorMock } from "../mocks/authorMock";
 // import { searchMock } from "../mocks/searchMock";
 
@@ -21,7 +21,11 @@ export function transformSearchResults(data: any): SearchApi {
     .path_from_root
     .map((filter: any) => filter.name)
     ?? [];
-  const items = data.results.map((result: any) => ({
+  console.log(data.results.map((result: any) => ({
+    free_shipping: result.shipping,
+  })));
+
+  const items: BaseItem[] = data.results.map((result: any) => ({
     id: result.id,
     title: result.title,
     price: {
@@ -31,7 +35,7 @@ export function transformSearchResults(data: any): SearchApi {
     },
     picture: result.thumbnail,
     condition: result.condition,
-    free_shipping: result.free_shipping,
+    free_shipping: result.shipping.free_shipping,
   }));
 
   return {
