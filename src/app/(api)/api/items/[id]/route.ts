@@ -11,11 +11,16 @@ export async function originalItem(id: string) {
     fetch(`https://api.mercadolibre.com/items/${id}`).then(res => res.json()),
     fetch(`https://api.mercadolibre.com/items/${id}/description`).then(res => res.json()),
   ]);
-  return { data, dataDesc };
+  const dataCategory = await fetch(`https://api.mercadolibre.com/categories/${data.category_id}`).then(res => res.json());
+  return { data, dataDesc, dataCategory };
   // return { data: itemMock, dataDesc: itemDescriptionMock };
 }
 
-export function transformItem(data: any, dataDesc: any): ItemApi {
+export function transformItem(
+  data: any,
+  dataDesc: any,
+  dataCategory: any,
+): ItemApi {
   const item: DetailedItem = {
     id: data.id,
     title: data.title,
@@ -30,10 +35,11 @@ export function transformItem(data: any, dataDesc: any): ItemApi {
     sold_quantity: data.initial_quantity, // TODO: ??
     description: dataDesc.plain_text,
   };
-
+  const categories = dataCategory.path_from_root.map((c: any) => c.name) ?? [];
   return {
     data: {
       author: authorMock,
+      categories,
       item,
     },
     error: null,
@@ -52,14 +58,14 @@ export async function GET(
         error: "Invalid Item ID",
       }, { status: 400 });
     }
-    const { data, dataDesc } = await originalItem(id);
+    const { data, dataDesc, dataCategory } = await originalItem(id);
     if (!data || !dataDesc) {
       return NextResponse.json({
         data: null,
         error: "Item Not Found",
       }, { status: 404 });
     }
-    const itemData = transformItem(data, dataDesc);
+    const itemData = transformItem(data, dataDesc, dataCategory);
     return NextResponse.json(itemData);
   } catch(error) {
     return NextResponse.json({

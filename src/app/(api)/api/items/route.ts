@@ -23,9 +23,6 @@ export function transformSearchResults(data: any): SearchApi {
     .path_from_root
     .map((filter: any) => filter.name)
     ?? [];
-  console.log(data.results.map((result: any) => ({
-    free_shipping: result.shipping,
-  })));
 
   const items: BaseItem[] = data.results.map((result: any) => ({
     id: result.id,

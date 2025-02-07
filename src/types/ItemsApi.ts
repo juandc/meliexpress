@@ -20,6 +20,7 @@ export type SearchApi = {
 export type ItemApi = {
   data: {
     author: ApiAuthor;
+    categories: string[];
     item: DetailedItem;
   };
   error: null;

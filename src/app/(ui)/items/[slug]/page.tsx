@@ -1,4 +1,4 @@
-import { BaseContent, ProductDetail } from "@/components/isomorphic";
+import { BaseContent, Breadcrumb, ProductDetail } from "@/components/isomorphic";
 import { getItem } from "@/services/getItem";
 import { notFound } from "next/navigation";
 
@@ -19,11 +19,7 @@ export default async function ItemPage(props: NextProps) {
   if (!data) notFound();
 
   return (
-    <BaseContent
-      breadcrumb={(
-        "breadcrumb"
-      )}
-    >
+    <BaseContent breadcrumb={<Breadcrumb categories={data.categories} />}>
       <ProductDetail {...data.item} />
     </BaseContent>
   );

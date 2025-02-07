@@ -1,5 +1,4 @@
-import { Fragment } from "react";
-import { BaseContent, SearchResult } from "@/components/isomorphic";
+import { BaseContent, Breadcrumb, SearchResult } from "@/components/isomorphic";
 import { getSearchResults } from "@/services/getSearchResults";
 import { notFound, redirect } from "next/navigation";
 
@@ -15,20 +14,7 @@ export default async function SearchPage(props: NextProps) {
   if (!data) notFound();
 
   return (
-    <BaseContent
-      breadcrumb={(
-        <p>
-          {data.categories.map((c, i) => (
-            <Fragment key={c}>
-              {i !== 0 && " > "}
-              {i === data.categories.length - 1 ? (
-                <b>{c}</b>
-              ) : <span>{c}</span>}
-            </Fragment>
-          ))}
-        </p>
-      )}
-    >
+    <BaseContent breadcrumb={<Breadcrumb categories={data.categories} />}>
       {data.items.map((item, index) => (
         <SearchResult
           key={item.id}

@@ -12,20 +12,24 @@ export const ProductDetail: FC<DetailedItem> = (props) => {
 
       <div className={classes.ProductDetail_data}>
         <p className={classes.ProductDetail_attrs}>
+          {/* TODO: props.condition should trasform into... ?? */}
           {props.condition} - {props.sold_quantity} vendidos
         </p>
         <h1 className={classes.ProductDetail_title}>{props.title}</h1>
+        {/* TODO: missing decimal styles */}
         <p className={classes.ProductDetail_price}>$ {props.price.amount}</p>
         <Button>Comprar</Button>
       </div>
 
-      <div className={classes.ProductDetail_desc}>
-        <h2>Descripción del Producto</h2>
-        {/* TODO: should be markdown */}
-        {props.description.split("\n").map((desc, item) => (
-          <p key={item}>{desc}</p>
-        ))}
-      </div>
+      {props.description.length > 0 && (
+        <div className={classes.ProductDetail_desc}>
+          <h2>Descripción del Producto</h2>
+          {/* TODO: markdown */}
+          {props.description.split("\n").map((desc, item) => (
+            <p key={item}>{desc}</p>
+          ))}
+        </div>
+      )}
     </article>
   );
 };
