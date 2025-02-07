@@ -1,14 +1,19 @@
 .SearchResult {
   /* TODO: border should be in ::before to have some horizontal padding */
   border-top: 1px solid #EEE;
-  display: flex;
-  flex-direction: row;
-  gap: 1rem;
   padding: 1rem 0;
 }
 .SearchResult__first {
   border: none;
   padding-top: 0;
+}
+
+.SearchResult a {
+  color: inherit;
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  gap: 1rem;
 }
 
 .SearchResult figure {

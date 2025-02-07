@@ -1,13 +1,30 @@
 import { BaseContent } from "@/components/isomorphic";
+import { getItem } from "@/services/getItem";
+import { notFound } from "next/navigation";
 
-export default function ItemPage() {
+type NextProps = {
+  params: Promise<{ slug: string }>
+};
+
+const getIdFromSlug = (slug: string) => {
+  const split = slug.split('-');
+  const id = split[split.length - 1];
+  return id;
+};
+
+export default async function ItemPage(props: NextProps) {
+  const { slug } = await props.params;
+  const id = getIdFromSlug(slug);
+  const { data } = await getItem(id);
+  if (!data) notFound();
+
   return (
     <BaseContent
       breadcrumb={(
         "breadcrumb"
       )}
     >
-      Item result...
+      <pre><code>{JSON.stringify(data.item, null, 1)}</code></pre>
     </BaseContent>
   );
 }

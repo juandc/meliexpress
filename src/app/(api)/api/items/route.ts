@@ -1,3 +1,5 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+
 import { type NextRequest, NextResponse } from "next/server";
 import type { BaseItem, SearchApi } from "@/types";
 import { authorMock } from "../mocks/authorMock";

@@ -1,4 +1,4 @@
-import { BaseItem } from "./Item";
+import { BaseItem, DetailedItem } from "./Item";
 
 export type ApiAuthor = {
   name: string;
@@ -10,6 +10,17 @@ export type SearchApi = {
     author: ApiAuthor;
     categories: string[];
     items: BaseItem[];
+  };
+  error: null;
+} | {
+  data: null;
+  error: unknown;
+};
+
+export type ItemApi = {
+  data: {
+    author: ApiAuthor;
+    item: DetailedItem;
   };
   error: null;
 } | {

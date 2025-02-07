@@ -5,8 +5,7 @@ type NextProps = {
 };
 
 export default async function SearchPage(props: NextProps) {
-  const searchParams = await props.searchParams;
-  const query = searchParams.q;
+  const { q: query } = await props.searchParams;
   if (!query?.length) {
     redirect("/");
   } else {
