@@ -1,5 +1,61 @@
-export async function GET(request: Request) {
-  return Response.json({
-    items: "query",
-  });
+import { type NextRequest, NextResponse } from "next/server";
+import type { SearchApi } from "@/types";
+import { authorMock } from "../mocks/authorMock";
+// import { searchMock } from "../mocks/searchMock";
+
+export async function originalSearchResults(q: string) {
+  const res = await fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${q}&limit=5`);
+  const data = await res.json();
+  return data;
+  // return searchMock;
+}
+
+export function transformSearchResults(data: any): SearchApi {
+  /* TODO: not sure this is the correct way to breadcrumb categories,
+   * "camas" returns well
+   * but "camaras" returns empty array
+  */
+  const categories = data.filters
+    .find((filter: any) => filter.id === "category")
+    ?.values[0]
+    .path_from_root
+    .map((filter: any) => filter.name)
+    ?? [];
+  const items = data.results.map((result: any) => ({
+    id: result.id,
+    title: result.title,
+    price: {
+      currency: result.currency_id,
+      amount: result.price,
+      decimals: result.price, // TODO: ??
+    },
+    picture: result.thumbnail,
+    condition: result.condition,
+    free_shipping: result.free_shipping,
+  }));
+
+  return {
+    data: {
+      author: authorMock,
+      categories,
+      items,
+    },
+    error: null,
+  };
+}
+
+
+export async function GET(request: NextRequest): Promise<NextResponse<SearchApi>> {
+  try {
+    const query = request.nextUrl.searchParams.get("q");
+    if (!query) throw new Error("Not query in items search")
+    const data = await originalSearchResults(query);
+    const searchData = transformSearchResults(data);
+    return NextResponse.json(searchData);
+  } catch(error) {
+    return NextResponse.json({
+      data: null,
+      error: (error as unknown as Error).message,
+    });
+  }
 }
