@@ -1,6 +1,6 @@
 'use client';
 
-import { BaseContent } from "@/components/isomorphic";
+import { BaseContent } from "@/ui/components/isomorphic";
 
 export default function NotFoundSearchPage({
 //   error,

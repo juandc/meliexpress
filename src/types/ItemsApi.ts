@@ -28,3 +28,14 @@ export type ItemApi = {
   data: null;
   error: unknown;
 };
+
+export type FavoritesApi = {
+  data: {
+    author: ApiAuthor;
+    items: DetailedItem[];
+  };
+  error: null;
+} | {
+  data: null;
+  error: unknown;
+};

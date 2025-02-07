@@ -1,6 +1,6 @@
-import { BaseContent, Breadcrumb, SearchResult } from "@/components/isomorphic";
-import { getSearchResults } from "@/services/getSearchResults";
 import { notFound, redirect } from "next/navigation";
+import { BaseContent, Breadcrumb, SearchResult } from "@/ui/components/isomorphic";
+import { getSearchResults } from "@/ui/services/getSearchResults";
 
 type NextProps = {
   params: Promise<{ query: string }>;

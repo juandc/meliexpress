@@ -1,13 +1,8 @@
-import { BaseContent } from "@/components/isomorphic";
+import { BaseContent } from "@/ui/components/isomorphic";
 
 export default function HomePage() {
   return (
-    <BaseContent
-      // breadcrumb={(
-      //   "breadcrumb"
-      // )}
-      isEmpty
-    >
+    <BaseContent isEmpty>
       ¡Bienvenido!
     </BaseContent>
   );

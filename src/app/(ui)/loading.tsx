@@ -1,11 +1,11 @@
-import { BaseContent } from "@/components/isomorphic";
+import { BaseContent } from "@/ui/components/isomorphic";
 
 export default async function LoadingSearchPage() {
   return (
     <BaseContent
       breadcrumb={(
         <p>
-          {[0,1,2].map((c, i) => (
+          {[0,1,2].map((c) => (
             <span key={c}>X</span>
           ))}
         </p>

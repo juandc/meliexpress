@@ -1,9 +1,16 @@
-import { type FC } from "react";
+import { type ReactNode, type FC } from "react";
 import type { DetailedItem } from "@/types";
 import { Button } from "../Button/Button";
 import classes from "./ProductDetail.module.css";
 
-export const ProductDetail: FC<DetailedItem> = (props) => {
+type Props = DetailedItem & {
+  additionalDataEl?: ReactNode;
+};
+
+export const ProductDetail: FC<Props> = ({
+  additionalDataEl,
+  ...props
+}) => {
   return (
     <article id={props.id} className={classes.ProductDetail}>
       <figure className={classes.ProductDetail_picture}>
@@ -19,6 +26,7 @@ export const ProductDetail: FC<DetailedItem> = (props) => {
         {/* TODO: missing decimal styles */}
         <p className={classes.ProductDetail_price}>$ {props.price.amount}</p>
         <Button>Comprar</Button>
+        {additionalDataEl}
       </div>
 
       {props.description.length > 0 && (

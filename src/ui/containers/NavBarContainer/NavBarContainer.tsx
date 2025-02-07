@@ -3,7 +3,7 @@
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { type ChangeEventHandler, useState, type FC } from "react";
-import { InputBar, NavBar } from "@/components/isomorphic";
+import { InputBar, NavBar } from "@/ui/components/isomorphic";
 import { getQueryFromUrl } from "./utils";
 
 export const NavBarContainer: FC = () => {

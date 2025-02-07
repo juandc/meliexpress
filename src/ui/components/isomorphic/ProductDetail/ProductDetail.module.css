@@ -63,6 +63,9 @@
 .ProductDetail_data button {
   width: 100%;
 }
+.ProductDetail_data button:not(:last-child) {
+  margin-bottom: .5rem;
+}
 
 @media (min-width: 768px) {
   .ProductDetail_data button {

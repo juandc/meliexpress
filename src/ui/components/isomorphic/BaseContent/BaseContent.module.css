@@ -20,6 +20,9 @@
   align-items: center;
   justify-content: center;
 }
+.BaseContent_content h1:not(:only-child) {
+  margin-bottom: 1rem;
+}
 
 .BaseContent_breadcrumb {
   font-size: 14px;
