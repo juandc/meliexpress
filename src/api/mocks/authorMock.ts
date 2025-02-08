@@ -1,6 +1,6 @@
-import type { ApiAuthor } from "@/types/ItemsApi";
+import type { ApiAuthorData } from "@/types/ItemsApi";
 
-export const authorMock: ApiAuthor = {
+export const authorMock: ApiAuthorData = {
   name: "Juan",
   lastname: "Castro",
 };

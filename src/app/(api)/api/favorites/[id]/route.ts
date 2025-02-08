@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { jsonError } from "@/api/jsonApi";
 import { InMemoryFavoritesService } from "@/api/favorites/favorites.service";
 
 export async function DELETE(
@@ -14,9 +15,6 @@ export async function DELETE(
       error: null,
     }, { status: 200 });
   } catch(error) {
-    return NextResponse.json({
-      data: null,
-      error,
-    }, { status: 500 });
+    return NextResponse.json(jsonError((error as unknown as Error).message), { status: 500 });
   }
 }

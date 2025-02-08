@@ -1,41 +1,50 @@
-import { BaseItem, DetailedItem } from "./Item";
+/* eslint-disable @typescript-eslint/no-empty-object-type */
+
+import type { NextResponse } from "next/server";
+import type { BaseItem, DetailedItem } from "./Item";
+
+export type SearchApiData = {
+  categories: string[];
+  items: BaseItem[];
+};
+
+export type ItemApiData = {
+  categories: string[];
+  item: DetailedItem;
+};
+
+export type FavoritesApiData = {
+  items: DetailedItem[];
+};
+
+
+export type ApiAuthorData = {
+  name: string;
+  lastname: string;
+};
 
 export type ApiAuthor = {
-  name: string;
-  lastname: string
+  author: ApiAuthorData;
 };
 
-export type SearchApi = {
-  data: {
-    author: ApiAuthor;
-    categories: string[];
-    items: BaseItem[];
-  };
+
+export type BaseApisData = SearchApiData | ItemApiData | FavoritesApiData;
+
+export interface BaseApiWithData<T extends BaseApisData> {
+  data: ApiAuthor & T;
   error: null;
-} | {
+};
+export interface SearchApi extends BaseApiWithData<SearchApiData> {}
+export interface ItemApi extends BaseApiWithData<ItemApiData> {}
+export interface FavoritesApi extends BaseApiWithData<FavoritesApiData> {}
+
+export type BaseApiError = string;
+export interface ErrorApi {
   data: null;
-  error: unknown;
+  error: BaseApiError;
 };
 
-export type ItemApi = {
-  data: {
-    author: ApiAuthor;
-    categories: string[];
-    item: DetailedItem;
-  };
-  error: null;
-} | {
-  data: null;
-  error: unknown;
-};
 
-export type FavoritesApi = {
-  data: {
-    author: ApiAuthor;
-    items: DetailedItem[];
-  };
-  error: null;
-} | {
-  data: null;
-  error: unknown;
-};
+export type BaseApis = SearchApi | ItemApi | FavoritesApi;
+
+export type NextResponseApi<T extends BaseApis> = NextResponse<T | ErrorApi>;
