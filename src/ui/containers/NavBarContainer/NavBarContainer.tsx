@@ -2,13 +2,31 @@
 
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { type ChangeEventHandler, useState, type FC } from "react";
-import { InputBar, NavBar } from "@/ui/components/isomorphic";
+import {
+  type ChangeEventHandler,
+  type FC,
+  type KeyboardEvent,
+  useState,
+} from "react";
+import { NavBar, SearchBar } from "@/ui/components/isomorphic";
 import { getQueryFromUrl } from "./utils";
+import { usePlaceholder } from "./usePlaceholder";
+
+const placeholders = [
+  "Buscar productos...",
+  "Encuentra lo que necesitas...",
+  "Explora nuestras categorías...",
+  "Descubre ofertas increíbles...",
+  "Nunca dejes de buscar...",
+];
 
 export const NavBarContainer: FC = () => {
   const router = useRouter();
   const [query, setQuery] = useState(getQueryFromUrl);
+  const placeholder = usePlaceholder({
+    placeholders,
+    shouldMove: query.length <= 0
+  });
 
   const onReset = () => {
     setQuery("");
@@ -18,9 +36,15 @@ export const NavBarContainer: FC = () => {
     setQuery(event.target.value);
   };
 
-  const onKeyDown = (event: React.KeyboardEvent<HTMLInputElement>) => {
-    if (event.key === "Enter" && query.length) {
+  const navigateToSearchResults = () => {
+    if (query.length) {
       router.push(`/items?q=${query}`);
+    }
+  };
+
+  const onKeyDown = (event: KeyboardEvent<HTMLInputElement>) => {
+    if (event.key === "Enter") {
+      navigateToSearchResults();
     }
   };
 
@@ -29,13 +53,17 @@ export const NavBarContainer: FC = () => {
       <Link href="/" onClick={onReset}>
         <img src="/Logo_ML@2x.png" />
       </Link>
-      <InputBar
+      <SearchBar
         type="text"
         value={query}
-        onChange={onChange}
+        onInputChange={onChange}
         onKeyDown={onKeyDown}
-        placeholder="Nunca pares de buscar"
+        onBtnClick={navigateToSearchResults}
+        placeholder={placeholder}
       />
+      <Link href="/favorites" onClick={onReset}>
+        <img src="/MyList.png" />
+      </Link>
     </NavBar>
   );
 };

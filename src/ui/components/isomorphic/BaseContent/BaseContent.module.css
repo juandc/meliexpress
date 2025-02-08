@@ -30,6 +30,11 @@
   margin-bottom: 0;
 }
 
+.BaseContent_breadcrumb span,
+.BaseContent_breadcrumb b {
+  display: inline-block;
+}
+
 @media (min-width: 768px) {
   .BaseContent_content,
   .BaseContent_breadcrumb {

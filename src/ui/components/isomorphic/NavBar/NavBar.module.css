@@ -1,6 +1,8 @@
 .NavBar {
+  --navbar-height: 48px;
   background-color: #FFE600;
-  height: 50px;
+  display: flex;
+  height: var(--navbar-height);
 }
 
 .NavBar_innerContainer {
@@ -17,6 +19,10 @@
 }
 
 @media (min-width: 768px) {
+  .NavBar {
+    --navbar-height: 56px;
+  }
+
   .NavBar_innerContainer {
     width: calc(100% - 4rem);
   }
@@ -35,11 +41,43 @@
   }
 }
 
-.NavBar_innerContainer img {
-  height: calc(50px - 1.5rem);
+.NavBar_innerContainer > a {
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  height: 100%;
+  padding: 0.25rem;
+}
+.NavBar_innerContainer > a:first-child {
+  transform: scale(1);
+  transform-origin: center;
+  transition: .3s transform;
+}
+.NavBar_innerContainer > a:first-child:hover {
+  transform: scale(1.05);
+}
+.NavBar_innerContainer > a:last-child:not(:only-child) {
+  padding: .5rem;
+  transition: .3s background-color;
+}
+.NavBar_innerContainer > a:last-child:not(:only-child):hover {
+  background-color: #ffffff84;
+}
+.NavBar_innerContainer > a > img {
+  height: 100%;
   width: auto;
 }
 
-.NavBar_innerContainer input {
-  flex: 1;
+@media (min-width: 500px) {
+  .NavBar_innerContainer > a:last-child:not(:only-child) {
+    padding: 0.4rem;
+  }
+}
+
+@media (min-width: 768px) {
+  .NavBar_innerContainer > a:last-child:not(:only-child) {
+    padding: 0.6rem;
+  }
 }

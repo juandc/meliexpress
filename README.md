@@ -8,13 +8,14 @@ Clon de MercadoLibre usando React.js y Next.js para buscar, visualizar y guardar
 
 ### UI TODOs
 
-- [ ] Search Bar
-- [ ] Search Results
-- [ ] Product Detail
-- [ ] Favorites
+- [x] Search Bar
+- [x] Search Results
+- [x] Product Detail
+- [x] Favorites
 - [ ] Loading Skeletons
 - [ ] Error Handling
 - [ ] Debounce Search Bar Previews
+- [ ] Image Modal (?)
 - [ ] Optimistic UI (favorites delete, abort notification?)
 - [ ] I18N / Tropicalization (?)
 
