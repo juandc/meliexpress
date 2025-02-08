@@ -15,7 +15,7 @@ const config: Config = {
   coverageDirectory: "coverage",
   coverageProvider: "v8",
   moduleNameMapper: {
-    '^@/(.*)$': '<rootDir>/$1',
+    '^@/(.*)$': '<rootDir>/src/$1',
   },
   testEnvironment: 'jsdom',
 };

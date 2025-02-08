@@ -10,7 +10,7 @@ const config: Config = {
   moduleNameMapper: {
     // Uncomment to provide the Next.js cache function
     // react: "next/dist/compiled/react/cjs/react.development.js",
-    "^@/(.*)$": "<rootDir>/$1",
+    "^@/(.*)$": "<rootDir>/src/$1",
   },
   setupFilesAfterEnv: ["./jest.setup.ts"],
 };

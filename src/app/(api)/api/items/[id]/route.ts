@@ -24,9 +24,6 @@ export async function GET(
       item,
     }));
   } catch(error) {
-    // TODO: standard CustomError and CustomErrors dict so any service,
-    // model or whatever can dispatch any error messages and http status
-    // (instead of always status 500)
     return NextResponse.json(
       jsonError((error as unknown as Error).message),
       { status: 500 },

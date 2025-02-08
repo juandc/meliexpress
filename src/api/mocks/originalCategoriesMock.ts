@@ -1,4 +1,4 @@
-export const categoriesMock = {
+export const originalCategoriesMock = {
   "id": "MLA5959",
   "name": "Cámaras de Seguridad",
   "picture": null,
