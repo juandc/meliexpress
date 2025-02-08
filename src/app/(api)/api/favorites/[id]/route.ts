@@ -1,10 +1,13 @@
-import { NextResponse } from "next/server";
+import { type NextRequest, NextResponse } from "next/server";
 import { FavoritesService } from "@/api/services/favorites.service";
 
-export async function POST(request: Request): Promise<NextResponse<unknown>> {
+export async function DELETE(
+  request: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+): Promise<NextResponse<unknown>> {
   try {
-    const body = await request.json();
-    FavoritesService.save(body);
+    const id = (await params).id;
+    FavoritesService.delete(id);
     return NextResponse.json({
       data: null,
       error: null,

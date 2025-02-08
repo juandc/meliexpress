@@ -2,9 +2,10 @@
 
 import { type NextRequest, NextResponse } from "next/server";
 import type { DetailedItem, ItemApi } from "@/types";
-import { authorMock } from "../../mocks/authorMock";
-// import { itemMock } from "../../mocks/itemMock";
-// import { itemDescriptionMock } from "../../mocks/itemDescriptionMock";
+import { authorMock } from "@/api/mocks/authorMock";
+import { FavoritesService } from "@/api/services/favorites.service";
+// import { itemMock } from "@/mocks/itemMock";
+// import { itemDescriptionMock } from "@/mocks/itemDescriptionMock";
 
 export async function originalItem(id: string) {
   const [data, dataDesc] = await Promise.all([
@@ -20,6 +21,7 @@ export function transformItem(
   data: any,
   dataDesc: any,
   dataCategory: any,
+  isFavorite: boolean,
 ): ItemApi {
   const item: DetailedItem = {
     id: data.id,
@@ -34,6 +36,7 @@ export function transformItem(
     free_shipping: data.shipping.free_shipping,
     sold_quantity: data.initial_quantity, // TODO: ??
     description: dataDesc.plain_text,
+    favorite: isFavorite,
   };
   const categories = dataCategory.path_from_root.map((c: any) => c.name) ?? [];
   return {
@@ -65,7 +68,13 @@ export async function GET(
         error: "Item Not Found",
       }, { status: 404 });
     }
-    const itemData = transformItem(data, dataDesc, dataCategory);
+    let isFavorite = false;
+    try {
+      isFavorite = !!FavoritesService.getById(id);
+    } catch {
+      isFavorite = false;
+    }
+    const itemData = transformItem(data, dataDesc, dataCategory, isFavorite);
     return NextResponse.json(itemData);
   } catch(error) {
     return NextResponse.json({

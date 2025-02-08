@@ -14,4 +14,5 @@ export type BaseItem = {
 export type DetailedItem = BaseItem & {
   sold_quantity: number;
   description: string;
+  favorite: boolean;
 };

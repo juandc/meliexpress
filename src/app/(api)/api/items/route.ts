@@ -2,8 +2,8 @@
 
 import { type NextRequest, NextResponse } from "next/server";
 import type { BaseItem, SearchApi } from "@/types";
-import { authorMock } from "../mocks/authorMock";
-// import { searchMock } from "../mocks/searchMock";
+import { authorMock } from "@/api/mocks/authorMock";
+// import { searchMock } from "@/api/mocks/searchMock";
 
 export async function originalSearchResults(q: string) {
   const res = await fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${q}&limit=5`);
