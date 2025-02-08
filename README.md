@@ -19,8 +19,11 @@ Clon de MercadoLibre usando React.js y Next.js para buscar, visualizar y guardar
 - [ ] Optimistic UI (favorites delete, abort notification?)
 - [ ] I18N / Tropicalization (?)
 - [ ] UI Tests
+  - [ ] Pages
+  - [x] Components
+  - [ ] Containers
 - [ ] A11Y (manual?) Tests
-- [ ] E2E Test
+- [ ] E2E Tests
 - [ ] Final work docs
 
 ## API
@@ -34,6 +37,10 @@ Por agilidad se usará el mismo App Router de Next.js para generar la API interm
 - [x] API Hardcodeada para Favoritos
 - [x] Some Clean Architecture practices
 - [ ] SQLite para guardar Favoritos (?)
+- [ ] Endpoint Tests
+  - [x] favorites
+  - [ ] items
+- [ ] Services tests
 - [ ] Final work docs
 
 ### Transformations

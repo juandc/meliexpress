@@ -5,7 +5,7 @@ type Props = {
 };
 
 export const Breadcrumb: FC<Props> = ({ categories }) => (
-  <p>
+  <p data-testid="breadcrumb">
     {categories.map((c, i) => (
       <Fragment key={c}>
         {i !== 0 && " > "}

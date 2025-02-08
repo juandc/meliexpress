@@ -2,26 +2,10 @@ import { type FC } from "react";
 import type { BaseItem } from "@/types";
 import classes from "./SearchResult.module.css";
 import Link from "next/link";
+import { getItemShortTitle, getItemHref } from "./utils";
 
 type Props = BaseItem & {
   isFirst?: boolean;
-};
-
-const getItemShortTitle = (title: string, withElipsis: boolean = true, length: number = 56) => {
-  if (title.length < length) return title;
-  return `${title.slice(0, length)}${withElipsis ? "..." : ""}`;
-};
-
-const getItemHref = (title: string, id: string) => {
-  let href = "/items/";
-  if (title) {
-    const shortTitle = getItemShortTitle(title, false, 30).trim();
-    const urlTitle = shortTitle.toLowerCase().replaceAll(" ", "-");
-    href += encodeURIComponent(urlTitle);
-    href += '-';
-  }
-  href += id;
-  return href;
 };
 
 export const SearchResult: FC<Props> = ({

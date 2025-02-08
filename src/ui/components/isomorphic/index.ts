@@ -1,5 +1,5 @@
 export { BaseContent } from "./BaseContent/BaseContent";
-export { Breadcrumb } from "./Breadcrumb";
+export { Breadcrumb } from "./Breadcrumb/Breadcrumb";
 export { NavBar } from "./NavBar/NavBar";
 export { SearchBar } from "./SearchBar/SearchBar";
 export { InputBar } from "./InputBar/InputBar";
