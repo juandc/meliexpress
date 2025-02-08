@@ -61,7 +61,7 @@ export const NavBarContainer: FC = () => {
         onBtnClick={navigateToSearchResults}
         placeholder={placeholder}
       />
-      <Link href="/favorites" onClick={onReset}>
+      <Link href="/favorites">
         <img src="/MyList.png" />
       </Link>
     </NavBar>
