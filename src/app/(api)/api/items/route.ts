@@ -1,52 +1,8 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-
 import { type NextRequest, NextResponse } from "next/server";
-import type { BaseItem, SearchApi } from "@/types";
+import type { SearchApi } from "@/types";
 import { authorMock } from "@/api/mocks/authorMock";
-// import { searchMock } from "@/api/mocks/searchMock";
-
-export async function originalSearchResults(q: string) {
-  const res = await fetch(`https://api.mercadolibre.com/sites/MLA/search?q=${q}&limit=5`);
-  const data = await res.json();
-  return data;
-  // return searchMock;
-}
-
-export function transformSearchResults(data: any): SearchApi {
-  /* TODO: not sure this is the correct way to breadcrumb categories,
-   * "camas" returns well
-   * but "camaras" returns empty array
-  */
-  const categories = data.filters
-    .find((filter: any) => filter.id === "category")
-    ?.values[0]
-    .path_from_root
-    .map((filter: any) => filter.name)
-    ?? [];
-
-  const items: BaseItem[] = data.results.map((result: any) => ({
-    id: result.id,
-    title: result.title,
-    price: {
-      currency: result.currency_id,
-      amount: result.price,
-      decimals: result.price, // TODO: ??
-    },
-    picture: result.thumbnail,
-    condition: result.condition,
-    free_shipping: result.shipping.free_shipping,
-  }));
-
-  return {
-    data: {
-      author: authorMock,
-      categories,
-      items,
-    },
-    error: null,
-  };
-}
-
+import { ExternalApiRequestItemsService } from "@/api/items/items.service";
+import { InMemoryFavoritesService } from "@/api/favorites/favorites.service";
 
 export async function GET(request: NextRequest): Promise<NextResponse<SearchApi>> {
   try {
@@ -57,15 +13,23 @@ export async function GET(request: NextRequest): Promise<NextResponse<SearchApi>
         error: "Not query in items search",
       }, { status: 400 });
     }
-    const data = await originalSearchResults(query);
-    if (!data?.results?.length) {
+    const favoritesService = new InMemoryFavoritesService();
+    const itemsService = new ExternalApiRequestItemsService(favoritesService);
+    const { categories, items } = await itemsService.getBySearch(query);
+    if (!items?.length) {
       return NextResponse.json({
         data: null,
         error: "Not Found",
       }, { status: 404 });
     }
-    const searchData = transformSearchResults(data);
-    return NextResponse.json(searchData);
+    return NextResponse.json({
+      data: {
+        author: authorMock,
+        categories,
+        items,
+      },
+      error: null,
+    });
   } catch(error) {
     return NextResponse.json({
       data: null,

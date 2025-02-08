@@ -1,11 +1,12 @@
 import { NextResponse } from "next/server";
 import type { FavoritesApi } from "@/types";
-import { FavoritesService } from "@/api/services/favorites.service";
+import { InMemoryFavoritesService } from "@/api/favorites/favorites.service";
 import { authorMock } from "@/api/mocks/authorMock";
 
 export async function GET(): Promise<NextResponse<FavoritesApi>> {
   try {
-    const favoritesData = FavoritesService.getAll();
+    const favoritesService = new InMemoryFavoritesService();
+    const favoritesData = favoritesService.getAll();
     return NextResponse.json({
       data: {
         author: authorMock,

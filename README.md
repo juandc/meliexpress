@@ -18,6 +18,10 @@ Clon de MercadoLibre usando React.js y Next.js para buscar, visualizar y guardar
 - [ ] Image Modal (?)
 - [ ] Optimistic UI (favorites delete, abort notification?)
 - [ ] I18N / Tropicalization (?)
+- [ ] UI Tests
+- [ ] A11Y (manual?) Tests
+- [ ] E2E Test
+- [ ] Final work docs
 
 ## API
 
@@ -25,10 +29,12 @@ Por agilidad se usará el mismo App Router de Next.js para generar la API interm
 
 ### API TODOs
 
-- [ ] API Hardcodeada pata Search y Product Detail
-- [ ] Conectar la API de MercadoLibre
-- [ ] API Hardcodeada para Favoritos
+- [x] API Hardcodeada pata Search y Product Detail
+- [x] Conectar la API de MercadoLibre
+- [x] API Hardcodeada para Favoritos
+- [x] Some Clean Architecture practices
 - [ ] SQLite para guardar Favoritos (?)
+- [ ] Final work docs
 
 ### Transformations
 

@@ -27,7 +27,6 @@ export const AddToFavoritesBtn: FC<DetailedItem> = (props) => {
     try {
       setStatus("removing");
       const success = await removeFavoriteItem(props.id);
-      // const success = true;
       setStatus(success ? "iddle" : "error");
     } catch {
       setStatus("error");
@@ -44,7 +43,7 @@ export const AddToFavoritesBtn: FC<DetailedItem> = (props) => {
     if (status === "saved") remove();
   };
 
-  const variant = status === "saved" ? "danger" : "secondary";
+  const variant = (status === "saved" || status === "error") ? "danger" : "secondary";
   const disabled = status === "removing" || status === "saving";
 
   return (
@@ -54,7 +53,7 @@ export const AddToFavoritesBtn: FC<DetailedItem> = (props) => {
         {status === "saving" && "Agregando..."}
         {status === "saved" && "Eliminar de favoritos"}
         {status === "removing" && "Eliminando..."}
-        {status === "error" && "Intentar de nuevo"}
+        {status === "error" && "Error, intentar de nuevo"}
       </Button>
 
       {status === "saved" && (

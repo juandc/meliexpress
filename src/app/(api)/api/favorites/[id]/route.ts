@@ -1,5 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
-import { FavoritesService } from "@/api/services/favorites.service";
+import { InMemoryFavoritesService } from "@/api/favorites/favorites.service";
 
 export async function DELETE(
   request: NextRequest,
@@ -7,7 +7,8 @@ export async function DELETE(
 ): Promise<NextResponse<unknown>> {
   try {
     const id = (await params).id;
-    FavoritesService.delete(id);
+    const favoritesService = new InMemoryFavoritesService();
+    favoritesService.delete(id);
     return NextResponse.json({
       data: null,
       error: null,

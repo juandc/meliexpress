@@ -1,10 +1,11 @@
 import { NextResponse } from "next/server";
-import { FavoritesService } from "@/api/services/favorites.service";
+import { InMemoryFavoritesService } from "@/api/favorites/favorites.service";
 
 export async function POST(request: Request): Promise<NextResponse<unknown>> {
   try {
     const body = await request.json();
-    FavoritesService.save(body);
+    const favoritesService = new InMemoryFavoritesService();
+    favoritesService.save(body);
     return NextResponse.json({
       data: null,
       error: null,
