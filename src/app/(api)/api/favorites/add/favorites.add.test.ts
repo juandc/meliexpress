@@ -28,7 +28,38 @@ describe("add favorites api", () => {
         });
         expect(response.status).toBe(200);
         const json = await response.json();
-        await expect(json).toStrictEqual({ data: null, error: null });
+        await expect(json.data).toBeNull();
+        await expect(json.error).toBeNull();
+      },
+    });
+  });
+
+  it("POST returns 400 when empty object body", async () => {
+    await testApiHandler({
+      appHandler,
+      test: async ({ fetch }) => {
+        const response = await fetch({
+          method: "POST",
+          body: JSON.stringify({}),
+        });
+        expect(response.status).toBe(400);
+        const json = await response.json();
+        await expect(json.data).toBeNull();
+        await expect(typeof json.error).toBe("string");
+      },
+    });
+  });
+  it("POST returns 500 when no body is sent", async () => {
+    await testApiHandler({
+      appHandler,
+      test: async ({ fetch }) => {
+        const response = await fetch({
+          method: "POST",
+        });
+        expect(response.status).toBe(500);
+        const json = await response.json();
+        await expect(json.data).toBeNull();
+        await expect(typeof json.error).toBe("string");
       },
     });
   });
