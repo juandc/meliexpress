@@ -10,15 +10,6 @@ export class ExternalApiRequestItemsService extends ItemsEntity {
     return categories;
   }
 
-  private _transformSearchCategories(original: any) {
-    const originalCategories: string[] = original.filters
-      ?.find((filter: any) => filter.id === "category")
-      ?.values[0]
-      ?.path_from_root ?? [];
-    const categories = this._transformCategories(originalCategories);
-    return categories;
-  }
-
   private _transformBaseItem(originalItem: any): BaseItem {
     const item: BaseItem = {
       id: originalItem.id,
@@ -53,7 +44,7 @@ export class ExternalApiRequestItemsService extends ItemsEntity {
 
   public async getBySearch(query: string) {
     const original = await ExternalApiRequestItemsData.originalSearchResults(query);
-    const categories = this._transformSearchCategories(original);
+    const categories = this._transformCategories(original.categories.path_from_root);
     const items = this._transformSearchItems(original);
     return { categories, items };
   }
@@ -66,7 +57,7 @@ export class ExternalApiRequestItemsService extends ItemsEntity {
     } catch {
       isFavorite = false;
     }
-    const categories = this._transformSearchCategories(dataCategory);
+    const categories = this._transformCategories(dataCategory.path_from_root);
     const item = this._transformDetailedItem(data, dataDesc, isFavorite);
     return { categories, item };
   }
