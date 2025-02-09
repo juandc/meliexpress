@@ -1,33 +1,9 @@
-import { BaseContent } from "@/ui/components/isomorphic";
+import { BaseContent, BreadcrumbSkeleton, SearchResultsSkeleton } from "@/ui/components/isomorphic";
 
 export default async function LoadingSearchPage() {
   return (
-    <BaseContent
-      breadcrumb={(
-        <p>
-          {[0,1,2].map((c) => (
-            <span key={c} style={{
-              backgroundColor: '#999',
-              borderRadius: '4px',
-              display: 'inline-block',
-              marginRight: '4px',
-              height: '14px',
-              width: '70px',
-            }} />
-          ))}
-        </p>
-      )}
-    >
-      {[0,1,2].map(x => <p key={x} style={{
-        backgroundColor: '#f0f0f0',
-        borderRadius: '4px',
-        display: 'inline-block',
-        marginRight: '4px',
-        // height: '100px',
-        height: '195px',
-        width: '100%',
-        marginBottom: '8px',
-      }} />)}
+    <BaseContent breadcrumb={<BreadcrumbSkeleton count={3} />}>
+      <SearchResultsSkeleton count={4} />
     </BaseContent>
   );
 }

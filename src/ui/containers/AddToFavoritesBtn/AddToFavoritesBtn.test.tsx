@@ -36,7 +36,7 @@ describe("AddToFavoritesBtn", () => {
 
   it("changes to saving on click", async () => {
     jest.spyOn(saveService, "saveFavoriteItem").mockImplementationOnce(
-      () => new Promise(resolve => setTimeout(() => resolve(true), 1))
+      () => new Promise(resolve => setTimeout(() => resolve(true), 10))
     );
     render(<AddToFavoritesBtn {...itemMock.item} />);
     const btn = screen.getByRole("button");
@@ -52,7 +52,7 @@ describe("AddToFavoritesBtn", () => {
     const btn = screen.getByRole("button");
     await act(async () => {
       await fireEvent.click(btn);
-      await new Promise(resolve => setTimeout(() => resolve(true), 1));
+      await new Promise(resolve => setTimeout(() => resolve(true), 10));
     });
     expect(btn).toHaveTextContent("Eliminar de favoritos");
     const link = screen.getByText("Ver favoritos");
@@ -70,7 +70,7 @@ describe("AddToFavoritesBtn", () => {
 
   it("changes to removing on click", async () => {
     jest.spyOn(removeService, "removeFavoriteItem").mockImplementationOnce(
-      () => new Promise(resolve => setTimeout(() => resolve(true), 1))
+      () => new Promise(resolve => setTimeout(() => resolve(true), 10))
     );
     render(<AddToFavoritesBtn {...itemMock.item} favorite />);
     const btn = screen.getByRole("button");
@@ -88,7 +88,7 @@ describe("AddToFavoritesBtn", () => {
     const btn = screen.getByRole("button");
     await act(async () => {
       await fireEvent.click(btn);
-      await new Promise(resolve => setTimeout(() => resolve(true), 1));
+      await new Promise(resolve => setTimeout(() => resolve(true), 10));
     });
     expect(btn).toHaveTextContent("Agregar a Favoritos");
   });
