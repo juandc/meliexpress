@@ -21,7 +21,7 @@ Clon de MercadoLibre usando React.js y Next.js para buscar, visualizar y guardar
 - [ ] UI Tests
   - [ ] Pages
   - [x] Components
-  - [ ] Containers
+  - [x] Containers
 - [ ] A11Y (manual?) Tests
 - [ ] E2E Tests
 - [ ] Final work docs
