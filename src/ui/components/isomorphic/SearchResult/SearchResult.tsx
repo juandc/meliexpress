@@ -1,4 +1,4 @@
-import { type FC } from "react";
+import { type ReactNode, type FC } from "react";
 import type { BaseItem } from "@/types";
 import classes from "./SearchResult.module.css";
 import Link from "next/link";
@@ -6,10 +6,12 @@ import { getItemShortTitle, getItemHref } from "./utils";
 
 type Props = BaseItem & {
   isFirst?: boolean;
+  additionalDataEl?: ReactNode;
 };
 
 export const SearchResult: FC<Props> = ({
   isFirst = false,
+  additionalDataEl,
   ...props
 }) => {
   const href = getItemHref(props.title, props.id);
@@ -36,7 +38,8 @@ export const SearchResult: FC<Props> = ({
             <h2 className={classes.SearchResult_title__desktop}>{props.title}</h2>
           </div>
           <div className={classes.SearchResult_dataSecondary}>
-            Mendoza ??
+            {additionalDataEl}
+            <p>Mendoza ??</p>
           </div>
         </div>
       </Link>

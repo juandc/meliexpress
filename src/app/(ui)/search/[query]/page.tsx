@@ -1,6 +1,7 @@
 import { notFound, redirect } from "next/navigation";
-import { BaseContent, Breadcrumb, SearchResult } from "@/ui/components/isomorphic";
 import { getSearchResults } from "@/ui/services/getSearchResults";
+import { AddToFavoritesBtn } from "@/ui/containers/AddToFavoritesBtn";
+import { BaseContent, Breadcrumb, SearchResult } from "@/ui/components/isomorphic";
 
 type NextProps = {
   params: Promise<{ query: string }>;
@@ -19,6 +20,9 @@ export default async function SearchPage(props: NextProps) {
         <SearchResult
           key={item.id}
           isFirst={index === 0}
+          additionalDataEl={(
+            <AddToFavoritesBtn {...item} size="sm" withLink={false} />
+          )}
           {...item}
         />
       ))}

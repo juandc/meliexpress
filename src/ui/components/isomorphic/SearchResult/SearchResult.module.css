@@ -3,6 +3,9 @@
   border-top: 1px solid #EEE;
   padding: 1rem 0;
 }
+.SearchResult:last-child {
+  padding-bottom: 0;
+}
 .SearchResult__first {
   border: none;
   padding-top: 0;
@@ -70,6 +73,17 @@
 
 .SearchResult_dataSecondary {
   font-size: .75rem;
+}
+
+.SearchResult_dataSecondary button {
+  margin-bottom: .5rem;
+  width: 100%;
+}
+
+@media (min-width: 500px) {
+  .SearchResult_dataSecondary button {
+    width: fit-content;
+  }
 }
 
 @media (min-width: 768px) {

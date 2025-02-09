@@ -1,14 +1,21 @@
 "use client";
 
-import { useState, type FC } from "react";
-import type { DetailedItem } from "@/types";
+import { type MouseEventHandler, useState, type FC, type ComponentProps } from "react";
+import type { BaseItem } from "@/types";
 import { saveFavoriteItem } from "@/ui/services/saveFavoriteItem";
 import { removeFavoriteItem } from "@/ui/services/removeFavoriteItem";
 import { Button, Anchor } from "@/ui/components/isomorphic";
 
 type Status = "iddle" | "saving" | "removing" | "saved" | "error";
 
-export const AddToFavoritesBtn: FC<DetailedItem> = (props) => {
+type Props = BaseItem & {
+  size?: ComponentProps<typeof Button>["size"];
+  withLink?: boolean;
+};
+
+export const AddToFavoritesBtn: FC<Props> = (props) => {
+  const { withLink = true } = props;
+
   const [status, setStatus] = useState<Status>(
     () => props.favorite ? "saved" : "iddle"
   );
@@ -37,7 +44,9 @@ export const AddToFavoritesBtn: FC<DetailedItem> = (props) => {
     if (typeof window !== "undefined") window.location.reload();
   };
 
-  const onClick = () => {
+  const onClick: MouseEventHandler<HTMLButtonElement> = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
     if (status === "error") reload();
     if (status === "iddle") save();
     if (status === "saved") remove();
@@ -48,7 +57,12 @@ export const AddToFavoritesBtn: FC<DetailedItem> = (props) => {
 
   return (
     <>
-      <Button variant={variant} onClick={onClick} disabled={disabled}>
+      <Button
+        variant={variant}
+        onClick={onClick}
+        disabled={disabled}
+        size={props.size}
+      >
         {status === "iddle" && "Agregar a Favoritos"}
         {status === "saving" && "Agregando..."}
         {status === "saved" && "Eliminar de favoritos"}
@@ -56,8 +70,12 @@ export const AddToFavoritesBtn: FC<DetailedItem> = (props) => {
         {status === "error" && "Error, intentar de nuevo"}
       </Button>
 
-      {status === "saved" && (
-        <Anchor variant="ghost" href="/favorites">Ver favoritos</Anchor>
+      {(withLink && status === "saved") && (
+        <Anchor
+          variant="ghost"
+          href="/favorites"
+          size={props.size}
+        >Ver favoritos</Anchor>
       )}
     </>
   );

@@ -24,6 +24,7 @@ export async function GET(
       item,
     }));
   } catch(error) {
+    console.error(error);
     return NextResponse.json(
       jsonError((error as unknown as Error).message),
       { status: 500 },

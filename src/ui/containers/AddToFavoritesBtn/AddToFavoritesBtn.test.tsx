@@ -40,7 +40,7 @@ describe("AddToFavoritesBtn", () => {
     );
     render(<AddToFavoritesBtn {...itemMock.item} />);
     const btn = screen.getByRole("button");
-    await act(async () => await fireEvent.click(btn));
+    await act(async () => { await fireEvent.click(btn) });
     expect(btn).toHaveTextContent("Agregando...");
   });
 
@@ -99,9 +99,9 @@ describe("AddToFavoritesBtn", () => {
     );
     render(<AddToFavoritesBtn {...itemMock.item} />);
     const btn = screen.getByRole("button");
-    await act(async () => await fireEvent.click(btn));
+    await act(async () => { await fireEvent.click(btn) });
     expect(btn).toHaveTextContent("Error, intentar de nuevo");
-    await act(async () => await fireEvent.click(btn));
+    await act(async () => { await fireEvent.click(btn) });
     expect(window.location.reload).toHaveBeenCalled();
   });
 
@@ -111,9 +111,9 @@ describe("AddToFavoritesBtn", () => {
     );
     render(<AddToFavoritesBtn {...itemMock.item} />);
     const btn = screen.getByRole("button");
-    await act(async () => await fireEvent.click(btn));
+    await act(async () => { await fireEvent.click(btn); });
     expect(btn).toHaveTextContent("Error, intentar de nuevo");
-    await act(async () => await fireEvent.click(btn));
+    await act(async () => { await fireEvent.click(btn) });
     expect(window.location.reload).toHaveBeenCalled();
   });
 
@@ -123,11 +123,9 @@ describe("AddToFavoritesBtn", () => {
     );
     render(<AddToFavoritesBtn {...itemMock.item} favorite />);
     const btn = screen.getByRole("button");
-    await act(async () => {
-      await fireEvent.click(btn);
-    });
+    await act(async () => { await fireEvent.click(btn); });
     expect(btn).toHaveTextContent("Error, intentar de nuevo");
-    await act(async () => await fireEvent.click(btn));
+    await act(async () => { await fireEvent.click(btn); });
     expect(window.location.reload).toHaveBeenCalled();
   });
 
@@ -137,7 +135,15 @@ describe("AddToFavoritesBtn", () => {
     );
     render(<AddToFavoritesBtn {...itemMock.item} favorite />);
     const btn = screen.getByRole("button");
-    await act(async () => await fireEvent.click(btn));
+    await act(async () => { await fireEvent.click(btn) });
     expect(btn).toHaveTextContent("Error, intentar de nuevo");
+  });
+
+  it("propagates sm class to button", () => {
+    render(<AddToFavoritesBtn {...itemMock.item} size="sm" favorite />);
+    const btn = screen.getByRole("button");
+    const link = screen.getByRole("link");
+    expect(btn).toHaveClass("Button__sm");
+    expect(link).toHaveClass("Button__sm");
   });
 });

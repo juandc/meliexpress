@@ -75,4 +75,15 @@ describe("SearchResult", () => {
     const article = screen.getByRole("article");
     expect(article).toHaveClass("SearchResult__first");
   });
+
+  it("renders additional data element", () => {
+    render((
+      <SearchResult
+        {...itemMock.item}
+        additionalDataEl={<p>Additional data</p>}
+      />
+    ));
+    const additionalData = screen.getByText("Additional data");
+    expect(additionalData).toBeInTheDocument();
+  });
 });

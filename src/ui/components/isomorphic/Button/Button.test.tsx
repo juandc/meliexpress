@@ -3,7 +3,7 @@ import { render, screen } from "@testing-library/react";
 import { Anchor, Button } from "./Button";
 
 describe("Button", () => {
-  it("renders a button", () => {
+  it("renders button", () => {
     render(<Button />);
     const btn = screen.getByRole("button");
     expect(btn).toBeInTheDocument();
@@ -24,7 +24,7 @@ describe("Button", () => {
     expect(handleClick).toHaveBeenCalled();
   });
 
-  it("renders variant classes button", () => {
+  it("renders variant classes", () => {
     render((
       <>
         <Button variant="primary" data-testid="button-primary" />
@@ -42,7 +42,21 @@ describe("Button", () => {
     const ghostBtn = screen.getByTestId("button-ghost");
     expect(ghostBtn).toHaveClass("Button__ghost");
   });
+
+  it("renders size classes", () => {
+    render((
+      <>
+        <Button size="sm" data-testid="button-sm" />
+        <Button size="md" data-testid="button-md" />
+      </>
+    ));
+    const smBtn = screen.getByTestId("button-sm");
+    expect(smBtn).toHaveClass("Button__sm");
+    const mdBtn = screen.getByTestId("button-md");
+    expect(mdBtn).not.toHaveClass("Button__sm");
+  });
 });
+
 
 describe("Anchor", () => {
   it("renders a Anchor", () => {
@@ -83,5 +97,18 @@ describe("Anchor", () => {
     expect(dangerBtn).toHaveClass("Button__danger");
     const ghostBtn = screen.getByTestId("anchor-ghost");
     expect(ghostBtn).toHaveClass("Button__ghost");
+  });
+
+  it("renders size classes", () => {
+    render((
+      <>
+        <Anchor href="/" size="sm" data-testid="anchor-sm" />
+        <Anchor href="/" size="md" data-testid="anchor-md" />
+      </>
+    ));
+    const smBtn = screen.getByTestId("anchor-sm");
+    expect(smBtn).toHaveClass("Button__sm");
+    const mdBtn = screen.getByTestId("anchor-md");
+    expect(mdBtn).not.toHaveClass("Button__sm");
   });
 });

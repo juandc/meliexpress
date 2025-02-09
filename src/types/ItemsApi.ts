@@ -14,7 +14,7 @@ export type ItemApiData = {
 };
 
 export type FavoritesApiData = {
-  items: DetailedItem[];
+  items: BaseItem[];
 };
 
 

@@ -31,6 +31,7 @@ export class InMemoryItemsService extends ItemsEntity {
       picture: originalItem.thumbnail,
       condition: originalItem.condition,
       free_shipping: originalItem.shipping.free_shipping,
+      favorite: false, // TODO: (optional)
     };
     return item;
   }

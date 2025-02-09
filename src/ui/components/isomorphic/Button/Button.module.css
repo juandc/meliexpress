@@ -19,6 +19,7 @@
   opacity: .6;
 }
 
+
 .Button__primary {
   background-color: #3483FA;
   color: #EEE;
@@ -50,4 +51,16 @@
 }
 .Button__danger:hover {
   background-color: #cd5a5a;
+}
+
+.Button__sm {
+  font-size: 14px;
+  height: 2.25rem;
+  padding: 0.5rem .9rem;
+}
+
+@media (min-width: 500px) {
+  .Button__sm {
+    padding: 0.5rem 1.5rem;
+  }
 }

@@ -6,16 +6,16 @@
  * to make it work
 */
 
-import type { DetailedItem } from "@/types";
+import type { BaseItem } from "@/types";
 
 export class InMemoryFavoritesData {
-  public static _favoriteItems: Record<DetailedItem["id"], DetailedItem> = {};
+  public static _favoriteItems: Record<BaseItem["id"], BaseItem> = {};
 
-  public static _getAll(): DetailedItem[] {
+  public static _getAll(): BaseItem[] {
     return Object.values(this._favoriteItems);
   }
 
-  public static _getById(id: DetailedItem["id"]): DetailedItem | undefined {
+  public static _getById(id: BaseItem["id"]): BaseItem | undefined {
     const item = this._favoriteItems[id];
     return item;
   }

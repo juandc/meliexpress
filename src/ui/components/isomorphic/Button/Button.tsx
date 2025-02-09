@@ -4,11 +4,13 @@ import classes from "./Button.module.css";
 
 type ButtonProps = ButtonHTMLAttributes<HTMLButtonElement> & {
   variant?: "primary" | "secondary" | "ghost" | "danger";
+  size?: "sm" | "md";
 }
 
 export const Button: FC<ButtonProps> = ({
-  variant = "primary",
   className,
+  variant = "primary",
+  size = "md",
   children,
   ...props
 }) => {
@@ -18,6 +20,7 @@ export const Button: FC<ButtonProps> = ({
     ${variant === "secondary" ? classes.Button__secondary : ""}
     ${variant === "ghost" ? classes.Button__ghost : ""}
     ${variant === "danger" ? classes.Button__danger : ""}
+    ${size === "sm" ? classes.Button__sm : ""}
     ${className ? className : ""}
   `;
 
@@ -30,11 +33,13 @@ export const Button: FC<ButtonProps> = ({
 
 type AnchorProps = ComponentProps<typeof Link> & {
   variant?: "primary" | "secondary" | "ghost" | "danger";
+  size?: "sm" | "md";
 }
 
 export const Anchor: FC<AnchorProps> = ({
-  variant = "primary",
   className,
+  variant = "primary",
+  size = "sm",
   children,
   ...props
 }) => {
@@ -44,6 +49,7 @@ export const Anchor: FC<AnchorProps> = ({
     ${variant === "secondary" ? classes.Button__secondary : ""}
     ${variant === "ghost" ? classes.Button__ghost : ""}
     ${variant === "danger" ? classes.Button__danger : ""}
+    ${size === "sm" ? classes.Button__sm : ""}
     ${className ? className : ""}
   `;
 

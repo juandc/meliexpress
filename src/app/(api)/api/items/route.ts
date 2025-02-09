@@ -18,6 +18,7 @@ export async function GET(request: NextRequest): Promise<NextResponseApi<SearchA
     }
     return NextResponse.json(jsonData({ categories, items }));
   } catch(error) {
+    console.error(error);
     return NextResponse.json(jsonError((error as unknown as Error).message), { status: 500 });
   }
 }

@@ -1,12 +1,11 @@
-// import type {  } from "@/types";
-import { DetailedItem } from "@/types";
+import type { BaseItem } from "@/types";
 import { apiEndpoints } from "./endpoints";
 
-export async function saveFavoriteItem(item: DetailedItem): Promise<boolean> {
+export async function saveFavoriteItem(item: BaseItem): Promise<boolean> {
   const res = await fetch(`http://localhost:3000${apiEndpoints.saveFavorite}`, {
     method: "POST",
     headers: {
-      "Content-Type": "Application/JSON",
+      "Content-Type": "application/json",
     },
     body: JSON.stringify({ ...item }),
   });

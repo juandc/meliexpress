@@ -16,6 +16,7 @@ export async function POST(request: Request): Promise<NextResponse<unknown>> {
       error: null,
     }, { status: 200 });
   } catch(error) {
+    console.error(error);
     return NextResponse.json(jsonError((error as unknown as Error).message), { status: 500 });
   }
 }

@@ -1,4 +1,5 @@
 import { getFavoriteItems } from "@/ui/services/getFavoriteItems";
+import { AddToFavoritesBtn } from "@/ui/containers/AddToFavoritesBtn";
 import { BaseContent, SearchResult } from "@/ui/components/isomorphic";
 
 export default async function SearchPage() {
@@ -19,6 +20,9 @@ export default async function SearchPage() {
         <SearchResult
           key={item.id}
           isFirst={index === 0}
+          additionalDataEl={(
+            <AddToFavoritesBtn {...item} size="sm" withLink={false} />
+          )}
           {...item}
         />
       ))}

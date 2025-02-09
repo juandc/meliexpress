@@ -9,6 +9,7 @@ export async function GET(): Promise<NextResponseApi<FavoritesApi>> {
     const favoritesData = favoritesService.getAll();
     return NextResponse.json(jsonData({ items: favoritesData }));
   } catch(error) {
+    console.error(error);
     return NextResponse.json(jsonError((error as unknown as Error).message), { status: 500 });
   }
 }

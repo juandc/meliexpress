@@ -9,10 +9,10 @@ export type BaseItem = {
   picture: string;
   condition: string;
   free_shipping: boolean;
+  favorite: boolean;
 };
 
 export type DetailedItem = BaseItem & {
   sold_quantity: number;
   description: string;
-  favorite: boolean;
 };

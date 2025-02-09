@@ -1,5 +1,5 @@
 import { testApiHandler } from "next-test-api-route-handler";
-import type { DetailedItem } from "@/types";
+import type { BaseItem } from "@/types";
 import { favoritesMock } from "@/api/mocks/favoritesMock";
 import { InMemoryFavoritesData } from "@/api/favorites/InMemory/InMemoryFavorites.data";
 import * as appHandler from "./route";
@@ -30,7 +30,7 @@ describe("get favorites api", () => {
   });
 
   it("GET returns 200 with items", async () => {
-    const itemsDict: Record<DetailedItem["id"], DetailedItem> = {};
+    const itemsDict: Record<BaseItem["id"], BaseItem> = {};
     favoritesMock.items.forEach((item) => itemsDict[item.id] = item);
     InMemoryFavoritesData._favoriteItems = itemsDict;
     InMemoryFavoritesData._getAll = () => Object.values(itemsDict);

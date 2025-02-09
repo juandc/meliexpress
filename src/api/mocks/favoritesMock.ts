@@ -13,8 +13,6 @@ export const favoritesMock: FavoritesApiData = {
       picture: "https://via.placeholder.com/200x200",
       condition: "new",
       free_shipping: true,
-      sold_quantity: 0,
-      description: "Description 1",
       favorite: true,
     },
     {
@@ -28,8 +26,6 @@ export const favoritesMock: FavoritesApiData = {
       picture: "https://via.placeholder.com/200x200",
       condition: "new",
       free_shipping: false,
-      sold_quantity: 5,
-      description: "Description 2",
       favorite: true,
     },
   ],
