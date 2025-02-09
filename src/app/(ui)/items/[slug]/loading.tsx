@@ -18,16 +18,19 @@ export default async function LoadingSearchPage() {
         </p>
       )}
     >
-      {[0,1,2].map(x => <p key={x} style={{
-        backgroundColor: '#f0f0f0',
-        borderRadius: '4px',
-        display: 'inline-block',
-        marginRight: '4px',
-        // height: '100px',
-        height: '195px',
-        width: '100%',
-        marginBottom: '8px',
-      }} />)}
+      <div style={{ padding: '1rem' }}>
+        <p style={{
+          backgroundColor: '#f0f0f0',
+          borderRadius: '4px',
+          display: 'inline-block',
+          marginRight: '4px',
+          // height: '100px',
+          height: '440px',
+          width: '100%',
+          maxWidth: '685px',
+          marginBottom: '8px',
+        }} />
+      </div>
     </BaseContent>
   );
 }
