@@ -56,20 +56,20 @@ describe("NavBarContainer", () => {
     expect(mockPush).not.toHaveBeenCalled();
   });
 
-  it("clicking the button navigates to /search/{input value} if input value has content", () => {
+  it("clicking the button navigates to search url if input value has content", () => {
     render(<NavBarContainer />);
     const input = screen.getByRole("textbox");
     fireEvent.change(input, { target: { value: "test" } });
     fireEvent.click(screen.getByRole("button"));
-    expect(mockPush).toHaveBeenCalledWith("/search/test");
+    expect(mockPush).toHaveBeenCalledWith("/items?q=test");
   });
 
-  it("pressing Enter key navigates to /search/{input value} if input value has content", () => {
+  it("pressing Enter key navigates to search url if input value has content", () => {
     render(<NavBarContainer />);
     const input = screen.getByRole("textbox");
     fireEvent.change(input, { target: { value: "test" } });
     fireEvent.keyDown(input, { key: "Enter" });
-    expect(mockPush).toHaveBeenCalledWith("/search/test");
+    expect(mockPush).toHaveBeenCalledWith("/items?q=test");
   });
 
   it("clicking home link resets input value", () => {
