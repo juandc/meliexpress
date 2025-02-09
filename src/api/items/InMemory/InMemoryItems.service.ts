@@ -26,12 +26,13 @@ export class InMemoryItemsService extends ItemsEntity {
       price: {
         currency: originalItem.currency_id,
         amount: originalItem.price,
-        decimals: originalItem.price, // TODO: ??
+        decimals: originalItem.price,
       },
       picture: originalItem.thumbnail,
       condition: originalItem.condition,
       free_shipping: originalItem.shipping.free_shipping,
-      favorite: false, // TODO: (optional)
+      address_state: undefined,
+      favorite: false,
     };
     return item;
   }
@@ -40,7 +41,7 @@ export class InMemoryItemsService extends ItemsEntity {
     const baseItem = this._transformBaseItem(originalItem);
     const detailedItem: DetailedItem = {
       ...baseItem,
-      sold_quantity: originalItem.initial_quantity, // TODO: ??
+      sold_quantity: originalItem.initial_quantity,
       description: dataDesc.plain_text,
       favorite: isFavorite,
     };

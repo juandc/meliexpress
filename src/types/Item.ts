@@ -9,6 +9,7 @@ export type BaseItem = {
   picture: string;
   condition: string;
   free_shipping: boolean;
+  address_state: string | undefined;
   favorite: boolean;
 };
 

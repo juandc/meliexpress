@@ -1,8 +1,8 @@
+import Link from "next/link";
 import { type ReactNode, type FC } from "react";
 import type { BaseItem } from "@/types";
-import classes from "./SearchResult.module.css";
-import Link from "next/link";
 import { getItemShortTitle, getItemHref } from "./utils";
+import classes from "./SearchResult.module.css";
 
 type Props = BaseItem & {
   isFirst?: boolean;
@@ -39,7 +39,7 @@ export const SearchResult: FC<Props> = ({
           </div>
           <div className={classes.SearchResult_dataSecondary}>
             {additionalDataEl}
-            <p>Mendoza ??</p>
+            {props.address_state && <p>{props.address_state}</p>}
           </div>
         </div>
       </Link>

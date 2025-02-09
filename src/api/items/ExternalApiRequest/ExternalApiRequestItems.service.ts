@@ -22,6 +22,7 @@ export class ExternalApiRequestItemsService extends ItemsEntity {
       picture: originalItem.thumbnail,
       condition: originalItem.condition,
       free_shipping: originalItem.shipping.free_shipping,
+      address_state: originalItem.address?.state_name ?? undefined,
       favorite: originalItem.favorite,
     };
     return item;
@@ -31,6 +32,7 @@ export class ExternalApiRequestItemsService extends ItemsEntity {
     const baseItem = this._transformBaseItem(originalItem);
     const detailedItem: DetailedItem = {
       ...baseItem,
+      address_state: baseItem.address_state ?? originalItem.seller_address.state.name ?? undefined,
       sold_quantity: originalItem.initial_quantity, // TODO: ??
       description: dataDesc.plain_text,
     };

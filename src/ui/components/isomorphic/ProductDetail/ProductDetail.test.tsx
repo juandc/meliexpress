@@ -8,7 +8,8 @@ describe("ProductDetail", () => {
     render(<ProductDetail {...itemMock.item} />);
     const title = screen.getByRole("heading", { level: 1 });
     const price = screen.getByText(`$ ${itemMock.item.price.amount}`);
-    const condition = screen.getByText(`${itemMock.item.condition} - ${itemMock.item.sold_quantity} vendidos`);
+    const condition = screen.getByText(`Nuevo`);
+    const soldQuantity = screen.getByText(`${itemMock.item.sold_quantity} vendidos`);
     const description = screen.getByText(itemMock.item.description.split("\n")[0]);
     const image = screen.getByRole("img");
 
@@ -16,6 +17,7 @@ describe("ProductDetail", () => {
     expect(title).toHaveTextContent(itemMock.item.title);
     expect(price).toBeInTheDocument();
     expect(condition).toBeInTheDocument();
+    expect(soldQuantity).toBeInTheDocument();
     expect(description).toBeInTheDocument();
     expect(image).toBeInTheDocument();
     expect(image).toHaveAttribute("src", itemMock.item.picture);

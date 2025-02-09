@@ -19,8 +19,9 @@ export const ProductDetail: FC<Props> = ({
 
       <div className={classes.ProductDetail_data}>
         <p className={classes.ProductDetail_attrs}>
-          {/* TODO: props.condition should trasform into... ?? */}
-          {props.condition} - {props.sold_quantity} vendidos
+          <span>{props.condition === "new" && "Nuevo"}</span>
+          {props.condition === "new" && " - "}
+          <span>{props.sold_quantity} vendidos</span>
         </p>
         <h1 className={classes.ProductDetail_title}>{props.title}</h1>
         {/* TODO: missing decimal styles */}
