@@ -2,7 +2,7 @@ import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { act } from "react";
 import { AddToFavoritesBtn } from "./AddToFavoritesBtn";
-import { itemMock } from "@/api/mocks/itemMock";
+import { itemMock } from "@/mocks/itemMock";
 import * as saveService from "@/ui/services/saveFavoriteItem";
 import * as removeService from "@/ui/services/removeFavoriteItem";
 

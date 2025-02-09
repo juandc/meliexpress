@@ -13,6 +13,7 @@ export const favoritesMock: FavoritesApiData = {
       picture: "https://via.placeholder.com/200x200",
       condition: "new",
       free_shipping: true,
+      address_state: "Buenos Aires",
       favorite: true,
     },
     {
@@ -26,6 +27,7 @@ export const favoritesMock: FavoritesApiData = {
       picture: "https://via.placeholder.com/200x200",
       condition: "new",
       free_shipping: false,
+      address_state: "Buenos Aires",
       favorite: true,
     },
   ],

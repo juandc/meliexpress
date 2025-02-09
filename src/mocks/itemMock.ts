@@ -15,6 +15,7 @@ export const itemMock: ItemApiData = {
     free_shipping: true,
     sold_quantity: 0,
     description: "Description 1",
+    address_state: "Buenos Aires",
     favorite: false,
   },
 };

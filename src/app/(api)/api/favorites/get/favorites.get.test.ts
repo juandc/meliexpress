@@ -1,6 +1,6 @@
 import { testApiHandler } from "next-test-api-route-handler";
 import type { BaseItem } from "@/types";
-import { favoritesMock } from "@/api/mocks/favoritesMock";
+import { favoritesMock } from "@/mocks/favoritesMock";
 import { InMemoryFavoritesData } from "@/api/favorites/InMemory/InMemoryFavorites.data";
 import * as appHandler from "./route";
 

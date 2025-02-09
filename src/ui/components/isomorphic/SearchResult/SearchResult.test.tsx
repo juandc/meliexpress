@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { SearchResult } from "./SearchResult";
-import { itemMock } from "@/api/mocks/itemMock";
+import { itemMock } from "@/mocks/itemMock";
 import { getItemShortTitle, getItemHref } from "./utils";
 
 describe("SearchResult getItemShortTitle", () => {

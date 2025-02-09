@@ -1,7 +1,7 @@
-import { originalSearchMock } from "@/api/mocks/originalSearchMock";
-import { originalItemMock } from "@/api/mocks/originalItemMock";
-import { originalItemDescriptionMock } from "@/api/mocks/originalItemDescriptionMock";
-import { originalCategoriesMock } from "@/api/mocks/originalCategoriesMock";
+import { originalSearchMock } from "@/mocks/originalSearchMock";
+import { originalItemMock } from "@/mocks/originalItemMock";
+import { originalItemDescriptionMock } from "@/mocks/originalItemDescriptionMock";
+import { originalCategoriesMock } from "@/mocks/originalCategoriesMock";
 
 export class InMemoryItemsData {
   public static async mockSearchResults(q: string) {

@@ -1,6 +1,6 @@
 import { testApiHandler } from "next-test-api-route-handler";
 import * as appHandler from "./route";
-import { itemMock } from "@/api/mocks/itemMock";
+import { itemMock } from "@/mocks/itemMock";
 
 describe("add favorites api", () => {
   it("POST returns 200", async () => {

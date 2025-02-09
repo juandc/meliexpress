@@ -273,6 +273,8 @@ deciden implementar tests).
 >
 > Considerando las tencologías empleadas, la escala del proyecto y el tiempo disponible se optó por crear un monolito en Next.js. Siguiendo el modelo del App Router, las vistas frontend y los endpoints de la API se encuentran en la carpeta `src/app/(ui)|(api)`.
 >
+> Los elementos comunes entre frontend y backend se encuentran en `src` (como los tipos de datos y los mocks).
+>
 > El resto de la estructura frontend se encuentra en `src/ui` y sigue una estructura convencional de aplicaciones en React.js (componentes, contenedores, requests a la API, hooks...).
 >
 > Y el resto de la estructura backend se encuentra en `src/api` siguiendo una implementación muy libre de Clean Architecture, priorizando (aunque sin limitarse a) la agilidad para cambiar entre fuentes de datos (e.j. de almacenamiento en memoria a bases de datos u otras APIs).

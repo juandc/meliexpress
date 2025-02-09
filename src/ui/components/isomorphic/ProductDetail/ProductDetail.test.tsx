@@ -1,7 +1,7 @@
 import "@testing-library/jest-dom";
 import { render, screen } from "@testing-library/react";
 import { ProductDetail } from "./ProductDetail";
-import { itemMock } from "@/api/mocks/itemMock";
+import { itemMock } from "@/mocks/itemMock";
 
 describe("ProductDetail", () => {
   it("renders product details", () => {

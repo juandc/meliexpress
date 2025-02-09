@@ -14,6 +14,8 @@ export const searchMock: SearchApiData = {
       picture: "https://via.placeholder.com/200x200",
       condition: "new",
       free_shipping: true,
+      address_state: "Buenos Aires",
+      favorite: false,
     },
     {
       id: "2",
@@ -26,6 +28,8 @@ export const searchMock: SearchApiData = {
       picture: "https://via.placeholder.com/200x200",
       condition: "new",
       free_shipping: false,
+      address_state: "Buenos Aires",
+      favorite: false,
     },
     {
       id: "3",
@@ -38,6 +42,8 @@ export const searchMock: SearchApiData = {
       picture: "https://via.placeholder.com/200x200",
       condition: "new",
       free_shipping: true,
+      address_state: "Buenos Aires",
+      favorite: false,
     },
     {
       id: "4",
@@ -50,6 +56,8 @@ export const searchMock: SearchApiData = {
       picture: "https://via.placeholder.com/200x200",
       condition: "new",
       free_shipping: false,
+      address_state: "Buenos Aires",
+      favorite: false,
     },
     {
       id: "5",
@@ -62,6 +70,8 @@ export const searchMock: SearchApiData = {
       picture: "https://via.placeholder.com/200x200",
       condition: "new",
       free_shipping: true,
+      address_state: "Buenos Aires",
+      favorite: false,
     },
   ],
 };

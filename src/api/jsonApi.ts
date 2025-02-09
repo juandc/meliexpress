@@ -1,5 +1,5 @@
 import type { BaseApiError, BaseApiWithData, ErrorApi, BaseApisData } from "@/types";
-import { authorMock } from "./mocks/authorMock";
+import { authorMock } from "../mocks/authorMock";
 
 export const jsonData = <T extends BaseApisData>(data: T): BaseApiWithData<T> => ({
   data: {
