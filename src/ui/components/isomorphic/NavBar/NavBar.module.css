@@ -1,6 +1,6 @@
 .NavBar {
   --navbar-height: 48px;
-  background-color: #FFE600;
+  background-color: var(--yellow);
   display: flex;
   height: var(--navbar-height);
 }
@@ -42,7 +42,7 @@
 }
 
 .NavBar_innerContainer > a {
-  border-radius: 4px;
+  border-radius: var(--bd-radius);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -63,7 +63,7 @@
   transition: .3s background-color;
 }
 .NavBar_innerContainer > a:last-child:not(:only-child):hover {
-  background-color: #ffffff84;
+  background-color: var(--white-50);
 }
 .NavBar_innerContainer > a > img {
   height: 100%;

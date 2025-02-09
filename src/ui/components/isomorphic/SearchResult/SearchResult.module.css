@@ -1,13 +1,13 @@
 .SearchResult {
   /* TODO: border should be in ::before to have some horizontal padding */
-  border-top: 1px solid #EEE;
-  border-radius: 4px;
+  border-top: 1px solid var(--gray);
+  border-radius: var(--bd-radius);
   padding: 1rem 0;
   box-shadow: none;
   transition: .3s box-shadow;
 }
 .SearchResult:hover {
-  box-shadow: 0px 1px 4px 0px #ededed;
+  box-shadow: 0px 1px 4px 0px var(--gray);
 }
 
 .SearchResult:last-child {
@@ -28,7 +28,7 @@
 
 .SearchResult figure {
   --search-result-size: 100px;
-  border-radius: 4px;
+  border-radius: var(--bd-radius);
   position: relative;
   height: var(--search-result-size);
   width: var(--search-result-size);

@@ -6,15 +6,15 @@
 }
 
 .BaseContent_content {
-  background-color: #fff;
-  border-radius: 4px;
+  background-color: var(--white);
+  border-radius: var(--bd-radius);
   flex: 1;
   height: 100%;
   padding: 1rem;
 }
 .BaseContent_content__isEmpty {
   background-color: transparent;
-  color: #999;
+  color: var(--gray-dark-01);
   font-size: 2rem;
   display: flex;
   align-items: center;

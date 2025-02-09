@@ -1,6 +1,6 @@
 .Button {
   border: none;
-  border-radius: 4px;
+  border-radius: var(--bd-radius);
   cursor: pointer;
   font-size: 18px;
   font-weight: 400;
@@ -21,19 +21,19 @@
 
 
 .Button__primary {
-  background-color: #3483FA;
-  color: #EEE;
+  background-color: var(--blue);
+  color: var(--gray);
 }
 .Button__primary:hover {
-  background-color: #246bd5;
+  background-color: var(--blue-dark-01);
 }
 
 .Button__secondary {
-  background-color: lightskyblue;
-  color: #333;
+  background-color: var(--blue-light-01);
+  color: var(--black);
 }
 .Button__secondary:hover {
-  background-color: #a7dfff;
+  background-color: var(--blue-light-02);
 }
 .Button__secondary:active {
   opacity: .8;
@@ -41,16 +41,16 @@
 
 .Button__ghost {
   background-color: transparent;
-  color: #333;
+  color: var(--black);
   text-decoration: underline;
 }
 
 .Button__danger {
-  background-color: #dd6a6a;
-  color: #EEE;
+  background-color: var(--red);
+  color: var(--gray);
 }
 .Button__danger:hover {
-  background-color: #cd5a5a;
+  background-color: var(--red-dark-01);
 }
 
 .Button__sm {

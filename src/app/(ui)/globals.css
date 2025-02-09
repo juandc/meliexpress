@@ -1,14 +1,21 @@
-/* CSS VARS */
-/* :root {
-} */
+:root {
+  --white: #FFF;
+  --white-50: #FFFFFF84;
+  --yellow: #FFE600;
+  --red: #dd6a6a;
+  --red-dark-01: #cd5a5a;
+  --blue: #3483FA;
+  --blue-dark-01: #246bd5;
+  --blue-light-01: #87cefa;
+  --blue-light-02: #a7dfff;
+  --gray: #EEE;
+  --gray-light-01: #F2F2F2;
+  --gray-dark-01: #999;
+  --gray-dark-02: #666;
+  --black: #333;
 
-/* @media (prefers-color-scheme: dark) {
-  :root {
-  }
-  html {
-    color-scheme: dark;
-  }
-} */
+  --bd-radius: 4px;
+}
 
 * {
   box-sizing: border-box;
@@ -17,9 +24,9 @@
 }
 
 html, body {
-  background-color: #eee;
-  color: #333;
-  font-family: var(--font-geist-sans);
+  background-color: var(--gray);
+  color: var(--black);
+  font-family: var(--font-montserrat);
   display: flex;
   flex-direction: column;
   min-height: 100dvh;

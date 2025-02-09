@@ -1,13 +1,13 @@
 .InputBar {
   border: none;
-  border-radius: 4px;
+  border-radius: var(--bd-radius);
   color: inherit;
   font-size: 16px;
   font-weight: 300;
   padding: .5rem .625rem;
 }
 .InputBar::placeholder {
-  color: #999;
+  color: var(--gray-dark-01);
 }
 
 @media (min-width: 1024px) {
