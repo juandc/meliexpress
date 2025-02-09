@@ -1,11 +1,11 @@
 import { redirect } from "next/navigation";
 
 type NextProps = {
-  searchParams: Promise<{ q: string }>;
+  searchParams: Promise<{ search: string }>;
 };
 
 export default async function SearchPage(props: NextProps) {
-  const { q: query } = await props.searchParams;
+  const { search: query } = await props.searchParams;
   if (!query?.length) {
     redirect("/");
   } else {

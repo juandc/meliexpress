@@ -38,7 +38,7 @@ export const NavBarContainer: FC = () => {
 
   const navigateToSearchResults = () => {
     if (query.length) {
-      router.push(`/items?q=${query}`);
+      router.push(`/items?search=${query}`);
     }
   };
 

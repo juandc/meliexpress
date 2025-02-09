@@ -61,7 +61,7 @@ describe("NavBarContainer", () => {
     const input = screen.getByRole("textbox");
     fireEvent.change(input, { target: { value: "test" } });
     fireEvent.click(screen.getByRole("button"));
-    expect(mockPush).toHaveBeenCalledWith("/items?q=test");
+    expect(mockPush).toHaveBeenCalledWith("/items?search=test");
   });
 
   it("pressing Enter key navigates to search url if input value has content", () => {
@@ -69,7 +69,7 @@ describe("NavBarContainer", () => {
     const input = screen.getByRole("textbox");
     fireEvent.change(input, { target: { value: "test" } });
     fireEvent.keyDown(input, { key: "Enter" });
-    expect(mockPush).toHaveBeenCalledWith("/items?q=test");
+    expect(mockPush).toHaveBeenCalledWith("/items?search=test");
   });
 
   it("clicking home link resets input value", () => {
