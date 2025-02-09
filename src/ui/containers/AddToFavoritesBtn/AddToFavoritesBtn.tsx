@@ -4,7 +4,7 @@ import { useState, type FC } from "react";
 import type { DetailedItem } from "@/types";
 import { saveFavoriteItem } from "@/ui/services/saveFavoriteItem";
 import { removeFavoriteItem } from "@/ui/services/removeFavoriteItem";
-import { Button, Anchor } from "../components/isomorphic";
+import { Button, Anchor } from "@/ui/components/isomorphic";
 
 type Status = "iddle" | "saving" | "removing" | "saved" | "error";
 

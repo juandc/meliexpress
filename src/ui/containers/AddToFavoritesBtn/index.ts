@@ -1,0 +1,1 @@
+export { AddToFavoritesBtn } from "./AddToFavoritesBtn";
