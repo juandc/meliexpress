@@ -5,9 +5,8 @@ export async function removeFavoriteItem(id: DetailedItem["id"]): Promise<boolea
   const res = await fetch(apiEndpoints.deleteFavorite(id), {
     method: "DELETE",
     headers: {
-      "Content-Type": "Application/JSON",
+      "Content-Type": "application/json",
     },
-    cache: 'no-store',
   });
   return res.ok;
 }

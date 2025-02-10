@@ -8,7 +8,6 @@ export async function saveFavoriteItem(item: BaseItem): Promise<boolean> {
       "Content-Type": "application/json",
     },
     body: JSON.stringify({ ...item }),
-    cache: 'no-store',
   });
   return res.ok;
 }

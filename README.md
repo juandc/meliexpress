@@ -44,12 +44,20 @@ imágenes de referencia, por lo que se puede diseñar libremente). ✅
 
 - Se debe garantizar un buen SEO para esta página, posiblemente usando SSR (Server-Side Rendering). 🛑
 
+> ✨
+>
+> Desde front se priorizó que toda la información posible fuera estructurada en [server components](https://platzi.com/blog/react-server-components/), así no solo el primer renderizado sucede desde el servidor (SSR), sino que también evita la rehidratación client-side de elementos estáticos.
+>
+> Para convivir con elementos interactivos (sean client-only o simplemente que sí necesitaran rehidratación) se usaron principalmente patrones de composición de componentes ([aquí más información](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#supported-pattern-passing-server-components-to-client-components-as-props)).
+>
+> Adicional, para la metadata se usaron las [convenciones de Next.js](https://nextjs.org/docs/app/api-reference/functions/generate-metadata), por lo que aunque haya requests duplicados entre archivos de la misma ruta (e.j. layout y page), su respuesta es memoizada y realmente solo sucede una vez por render ([aquí más información](https://nextjs.org/docs/app/building-your-application/caching#data-cache)).
+
 - Debe incluir un botón para agregar a favoritos (este botón no aparece en las imágenes de referencia,
 por lo que se puede diseñar libremente). ✅
 
-- Se debe mostrar el breadcrumb de categorías del producto. ✅
-
 > ✨ El botón de agregar a favoritos se muestra debajo del botón de comprar. Replica la funcionalidad del botón de agregar a favoritos en la página de resultados de búsqueda, pero con un tamaño más grande y un link para ver la lista de favoritos si el producto ya está en la lista.
+
+- Se debe mostrar el breadcrumb de categorías del producto. ✅
 
 ![Vista de detalle del producto implementada](https://github.com/user-attachments/assets/4a2969be-683b-48c7-9623-73e7696b4ac3)
 
@@ -273,13 +281,33 @@ deciden implementar tests).
 >
 > Considerando las tencologías empleadas, la escala del proyecto y el tiempo disponible se optó por crear un monolito en Next.js. Siguiendo el modelo del App Router, las vistas frontend y los endpoints de la API se encuentran en la carpeta `src/app/(ui)|(api)`.
 >
-> Los elementos comunes entre frontend y backend se encuentran en `src` (como los tipos de datos y los mocks).
+> Los elementos comunes entre frontend y backend se encuentran en `src` (como los tipos y mocks).
 >
 > El resto de la estructura frontend se encuentra en `src/ui` y sigue una estructura convencional de aplicaciones en React.js (componentes, contenedores, requests a la API, hooks...).
 >
 > Y el resto de la estructura backend se encuentra en `src/api` siguiendo una implementación muy libre de Clean Architecture, priorizando (aunque sin limitarse a) la agilidad para cambiar entre fuentes de datos (e.j. de almacenamiento en memoria a bases de datos u otras APIs).
 
 - La evaluación se basará en la calidad del código, la arquitectura utilizada y la experiencia del usuario.
+
+> ✨ Para mejorar la experiencia de usuario se implementaron algunas funcionalidades extra:
+>
+> - **Loading Skeletons**
+>
+> Se implementaron estados de carga mientras se espera la respuesta de la API al navegar por la aplicación (e.j. al navegar desde el home hasta la página de favoritos).
+>
+> También hay estados de carga mientras se espera la respuesta de la API durante el primer render server-side de cualquier ruta de la aplicación (e.j. abriendo una nueva pestaña del navegador y entrando directamente a la página de favoritos), esto gracias a las convenciones de React ([Suspense](https://react.dev/reference/react/Suspense)) y Next ([loading.js](https://nextjs.org/docs/app/api-reference/file-conventions/loading)) para hacer streaming ([aquí más información](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming)).
+>
+> El único caso donde no se implementó estado de carga durante el streaming del primer render es en la vista de detalle de producto, ya que se priorizó no dar ninguna respuesta hasta tener la información indispensable para la metadata (y al ser el mismo request para toda la información no queda nada más a esperar para mostrar un estado de carga).
+>
+> **SearchBar con placeholder dinámico**
+>
+> En busca de captar la información del usuario e indicarle la primera acción principal que debe realizar (buscar) se implementó un placeholder con efecto de irse escribiendo y borrando con diferentes frases. Para una implementación real se recomendaría medir entre tener o no placeholders dinámicos (subir el número de búsquedas? bajar el churn en la página principal?) para confirmar que sí ayuda a los usuarios en vez de ser realmente una distracción.
+>
+> También en la vista de resultados se autocompletó el término buscado (de la url) en la barra de búsqueda.
+>
+> **Micro-transiciones**
+>
+> Aunque no son animaciones especialmente complejas, se agregaron algunos suaves y sencillos cambios de estilo en diferentes elementos al recibir interacción de los usuarios, principalmente buscando indicar que son elementos clickeables / que causan alguna reacción en la aplicación.
 
 
 ## TODOs (just some notes for myself)
@@ -292,7 +320,7 @@ UI
 - [x] Favorites
 - [x] Loading Skeletons
 - [x] Error Handling
-- [ ] SEO
+- [x] SEO
 - [ ] UI Tests
   - [x] Components
   - [x] Containers

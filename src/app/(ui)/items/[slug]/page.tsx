@@ -1,16 +1,11 @@
 import { notFound } from "next/navigation";
+import { getIdFromSlug } from "@/ui/utils/pathUtils";
 import { getItem } from "@/ui/services/getItem";
 import { AddToFavoritesBtn } from "@/ui/containers/AddToFavoritesBtn";
 import { BaseContent, Breadcrumb, ProductDetail } from "@/ui/components/isomorphic";
 
 type NextProps = {
   params: Promise<{ slug: string }>
-};
-
-const getIdFromSlug = (slug: string) => {
-  const split = slug.split('-');
-  const id = split[split.length - 1];
-  return id;
 };
 
 export default async function ItemPage(props: NextProps) {

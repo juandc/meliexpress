@@ -60,6 +60,7 @@ export const NavBarContainer: FC = () => {
         onKeyDown={onKeyDown}
         onBtnClick={navigateToSearchResults}
         placeholder={placeholder}
+        autoFocus
       />
       <Link href="/favorites">
         <img src="/MyList.png" />
