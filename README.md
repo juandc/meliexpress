@@ -1,4 +1,4 @@
-# MeliExpress
+# [MeliExpress](https://meliexpress.vercel.app/)
 
 Clon de MercadoLibre usando React.js y Next.js para buscar, visualizar y guardar (como favoritos) productos.
 
@@ -34,6 +34,7 @@ imágenes de referencia, por lo que se puede diseñar libremente). ✅
 - Se debe mostrar el breadcrumb de categorías de la búsqueda. ✅
 
 > ✨ Se usó la información del `address_state` como ubicación en los resultados de búsqueda.
+>
 > ✨ El botón de agregar a favoritos se muestra en la esquina superior derecha de cada producto. Si el producto ya está en favoritos, permite eliminarlo de la lista. Pasa a un estado de carga mientras se completa el proceso de agregar o eliminar de favoritos.
 
 ![Vista de search results implementada](https://github.com/user-attachments/assets/c2b69d68-965e-471d-a75e-ca41c5d05676)
@@ -48,14 +49,14 @@ imágenes de referencia, por lo que se puede diseñar libremente). ✅
 >
 > Desde front se priorizó que toda la información posible fuera estructurada en [server components](https://platzi.com/blog/react-server-components/), así no solo el primer renderizado sucede desde el servidor (SSR), sino que también evita la rehidratación client-side de elementos estáticos.
 >
-> Para convivir con elementos interactivos (sean client-only o simplemente que sí necesitaran rehidratación) se usaron principalmente patrones de composición de componentes ([aquí más información](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#supported-pattern-passing-server-components-to-client-components-as-props)).
+> Para convivir con elementos interactivos (sean client-only o simplemente que sí necesitaran rehidratación) se usaron patrones de composición de componentes ([aquí más información](https://nextjs.org/docs/app/building-your-application/rendering/composition-patterns#supported-pattern-passing-server-components-to-client-components-as-props)).
 >
-> Adicional, para la metadata se usaron las [convenciones de Next.js](https://nextjs.org/docs/app/api-reference/functions/generate-metadata), por lo que aunque haya requests duplicados entre archivos de la misma ruta (e.j. layout y page), su respuesta es memoizada y realmente solo sucede una vez por render ([aquí más información](https://nextjs.org/docs/app/building-your-application/caching#data-cache)).
+> Adicional, para la metadata se usaron las [convenciones de Next.js](https://nextjs.org/docs/app/api-reference/functions/generate-metadata), así que aunque haya requests duplicados entre archivos de la misma ruta (e.j. layout y page) su respuesta es memoizada y realmente solo sucede una vez por render ([aquí más información](https://nextjs.org/docs/app/building-your-application/caching#data-cache)).
 
 - Debe incluir un botón para agregar a favoritos (este botón no aparece en las imágenes de referencia,
 por lo que se puede diseñar libremente). ✅
 
-> ✨ El botón de agregar a favoritos se muestra debajo del botón de comprar. Replica la funcionalidad del botón de agregar a favoritos en la página de resultados de búsqueda, pero con un tamaño más grande y un link para ver la lista de favoritos si el producto ya está en la lista.
+> ✨ El botón de agregar a favoritos se muestra debajo del botón de comprar. Replica la funcionalidad del botón de agregar a favoritos en la página de resultados de búsqueda, pero con un tamaño más grande y un link para ver la lista de favoritos si el producto fue previamente guardado.
 
 - Se debe mostrar el breadcrumb de categorías del producto. ✅
 
@@ -83,7 +84,7 @@ Las vistas son navegables de manera independiente y cuentan con su propia url:
 
 - Caja de Búsqueda: `/` ✅
 
-- Resultados de la búsqueda: `/items?search=`
+- Resultados de la búsqueda: `/items?search=` ✅ (como redirect)
 
 > ✨ El path "principal" para los resultados de búsqueda es `/search/{query}`, el path indicado `/items?search={query}` solo hace redirect a `/search/{query}` por agilidad para la implementación.
 
@@ -124,7 +125,7 @@ Construir los siguientes endpoints para ser utilizados desde las vistas:
 > }
 > ```
 >
-> Formato implementado:
+> ✨ Formato implementado:
 > ```js
 > {
 >   data: {
@@ -185,7 +186,7 @@ Construir los siguientes endpoints para ser utilizados desde las vistas:
 > }
 > ```
 >
-> Formato implementado:
+> ✨ Formato implementado:
 > ```js
 > {
 >   data: {
@@ -260,13 +261,13 @@ deciden implementar tests).
 
 - La firma del json en el campo autor se refiere a tu nombre y apellido. Deberás agregar esta firma en el manejo de datos entre la API y el front-end. ✅
 
-- El repositorio puede ser público o privado, como prefieras.
+- El repositorio puede ser público o privado, como prefieras. 🆗
 
-- No es necesario implementar la paginación, ni el filtro por categorías.
+- No es necesario implementar la paginación, ni el filtro por categorías. 🆗
 
 - El breadcrumb que se muestra en el listado de búsqueda debe armarse basado en la categoría que más resultados obtuvo (dicha información está disponible en la API de Search). (Obviamente, el breadcrumb de la página de detalle del ítem debe armarse con la categoría propia del ítem). ✅
 
-- Podés usar en el listado de search la imagen que devuelve la API (90x90) aunque esta se vea pixelada al estirarla para ajustarse al diseño del test. (A fines del test, no hace falta que busques la imagen en el tamaño exacto).
+- Podés usar en el listado de search la imagen que devuelve la API (90x90) aunque esta se vea pixelada al estirarla para ajustarse al diseño del test. (A fines del test, no hace falta que busques la imagen en el tamaño exacto). 🆗
 
 
 ## Consideraciones Finales
@@ -275,7 +276,7 @@ deciden implementar tests).
 
 > ✨ Se implementó un diseño responsive, para pantallas de 320px de ancho en adelante (con un ancho máximo a partir de desktop, no está optimizado para ultrawide).
 
-- Se espera un código bien estructurado y buenas prácticas en el desarrollo.
+- Se espera un código bien estructurado y buenas prácticas en el desarrollo. 🤞
 
 > ✨
 >
@@ -287,7 +288,7 @@ deciden implementar tests).
 >
 > Y el resto de la estructura backend se encuentra en `src/api` siguiendo una implementación muy libre de Clean Architecture, priorizando (aunque sin limitarse a) la agilidad para cambiar entre fuentes de datos (e.j. de almacenamiento en memoria a bases de datos u otras APIs).
 
-- La evaluación se basará en la calidad del código, la arquitectura utilizada y la experiencia del usuario.
+- La evaluación se basará en la calidad del código, la arquitectura utilizada y la experiencia del usuario. 🤞
 
 > ✨ Para mejorar la experiencia de usuario se implementaron algunas funcionalidades extra:
 >
@@ -299,13 +300,13 @@ deciden implementar tests).
 >
 > El único caso donde no se implementó estado de carga durante el streaming del primer render es en la vista de detalle de producto, ya que se priorizó no dar ninguna respuesta hasta tener la información indispensable para la metadata (y al ser el mismo request para toda la información no queda nada más a esperar para mostrar un estado de carga).
 >
-> **SearchBar con placeholder dinámico**
+> - **SearchBar con placeholder dinámico**
 >
 > En busca de captar la información del usuario e indicarle la primera acción principal que debe realizar (buscar) se implementó un placeholder con efecto de irse escribiendo y borrando con diferentes frases. Para una implementación real se recomendaría medir entre tener o no placeholders dinámicos (subir el número de búsquedas? bajar el churn en la página principal?) para confirmar que sí ayuda a los usuarios en vez de ser realmente una distracción.
 >
 > También en la vista de resultados se autocompletó el término buscado (de la url) en la barra de búsqueda.
 >
-> **Micro-transiciones**
+> - **Micro-transiciones**
 >
 > Aunque no son animaciones especialmente complejas, se agregaron algunos suaves y sencillos cambios de estilo en diferentes elementos al recibir interacción de los usuarios, principalmente buscando indicar que son elementos clickeables / que causan alguna reacción en la aplicación.
 
