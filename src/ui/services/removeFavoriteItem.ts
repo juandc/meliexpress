@@ -7,6 +7,7 @@ export async function removeFavoriteItem(id: DetailedItem["id"]): Promise<boolea
     headers: {
       "Content-Type": "Application/JSON",
     },
+    cache: 'no-store',
   });
   return res.ok;
 }
