@@ -265,12 +265,15 @@ el detalle del producto la api de categoría de producto. ✅
 
 ## Funcionalidades Extra
 
-- Test Unitarios ✅ / Integración 🛑 (Requerido)
+- Test Unitarios / Integración (Requerido) ✅
 
-- Accesibilidad 🛑 (Plus si se implementa correctamente).
+> ✨ Se implementaron pruebas unitarias a los componentes de la UI y a los endpoints de la API usando Jest. También se implementaron pruebas E2E a los flujos más importantes de la aplicación usando Playwright.
 
-- Por temas de seguridad sería bueno que no se accedan a las API directamente desde el front-end, sino
-crear una api intermediaria que devuelva la información ✅ (Requerido).
+- Accesibilidad (Plus si se implementa correctamente). ✅
+
+> 👀 Aunque no se implementaron pruebas automatizadas ni una auditoría profunda en accesibilidad, sí se hicieron pruebas manuales y con Lighthouse para las consideraciones más generales.
+
+- Por temas de seguridad sería bueno que no se accedan a las API directamente desde el front-end, sino crear una api intermediaria que devuelva la información ✅ (Requerido).
 
 
 ## Tecnologías Permitidas
@@ -282,7 +285,7 @@ crear una api intermediaria que devuelva la información ✅ (Requerido).
 - Se recomienda el uso de herramientas de pruebas como Jest, React Testing Library o similares (si se
 deciden implementar tests).
 
-> ✨ Se usó Next.js tanto para el frontend como para el backend.
+> ✨ Se usó Next.js con TypeScript tanto para el frontend en React.js como para el backend en Node.js, Jest, Testing Library y Playwright para las pruebas, ningún preprocesador de CSS.
 
 
 ## Notas
@@ -310,9 +313,9 @@ deciden implementar tests).
 >
 > Considerando las tencologías empleadas, la escala del proyecto y el tiempo disponible se optó por crear un monolito en Next.js. Siguiendo el modelo del App Router, las vistas frontend y los endpoints de la API se encuentran en la carpeta `src/app/(ui)|(api)`.
 >
-> Los elementos comunes entre frontend y backend se encuentran en `src` (como los tipos y mocks).
+> Los elementos comunes entre frontend y backend se encuentran en `src` (como tipos y mocks).
 >
-> El resto de la estructura frontend se encuentra en `src/ui` y sigue una estructura convencional de aplicaciones en React.js (componentes, contenedores, requests a la API, hooks...).
+> El resto de la estructura frontend se encuentra en `src/ui` y sigue una estructura convencional de aplicaciones en React.js (componentes, contenedores, requests a la API, hooks, diccionarios...).
 >
 > Y el resto de la estructura backend se encuentra en `src/api` siguiendo una implementación muy libre de Clean Architecture, priorizando (aunque sin limitarse a) la agilidad para cambiar entre fuentes de datos (e.j. de almacenamiento en memoria a bases de datos u otras APIs).
 
@@ -351,16 +354,17 @@ UI
 - [x] Error Handling
 - [x] SEO
 - [ ] UI Tests
-  - [x] Components
-  - [x] Containers
   - [ ] Pages (wont do, e2e instead)
+  - [x] Containers
+  - [x] Components
   - [x] a11y
     - [x] Lighthouse
     - [x] Manual
+    - [ ] [Auditoría a profundidad](https://platzi.com/cursos/auditoria-accesibilidad-web/)
 - [ ] Debounce Search Bar Previews
 - [ ] Optimistic UI (favorites delete, abort notification?)
 - [ ] Image Modal
-- [ ] I18N / Tropicalization
+- [ ] i18n / Tropicalization
 
 API
 
