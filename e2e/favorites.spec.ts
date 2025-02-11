@@ -1,7 +1,7 @@
 import { test, expect } from '@playwright/test';
 import esDictionary from "@/ui/dictionaries/es";
 
-const navCopy = esDictionary.navbar;
+const navCopy = esDictionary.shared.navbar;
 const favoritesCopy = esDictionary.shared.addToFavorites;
 const btnCopys = favoritesCopy.btnCopy;
 

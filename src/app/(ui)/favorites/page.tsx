@@ -1,21 +1,25 @@
 import { getFavoriteItems } from "@/ui/services/getFavoriteItems";
 import { AddToFavoritesBtn } from "@/ui/containers/AddToFavoritesBtn";
 import { BaseContent, SearchResult } from "@/ui/components/isomorphic";
+import { getDictionaryFromServer } from "@/ui/dictionaries";
 
 export default async function SearchPage() {
+  const dictionary = await getDictionaryFromServer();
+  const { empty, title } = dictionary.favorites;
+
   const { data } = await getFavoriteItems();
 
   if (!data?.items.length) {
     return (
       <BaseContent isEmpty>
-        Aquí aparecerán los items que guardes como favoritos
+        {empty}
       </BaseContent>
     );
   }
 
   return (
     <BaseContent>
-      <h1>Tus favoritos</h1>
+      <h1>{title}</h1>
       {data.items.map((item, index) => (
         <SearchResult
           key={item.id}

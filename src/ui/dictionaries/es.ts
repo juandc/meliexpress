@@ -16,18 +16,18 @@ const esDictionary: Dictionary = {
       title: (title: string) => `${title} | MeliExpress`,
     },
   },
-  navbar: {
-    homeLinkTitle: "Página principal",
-    placeholders: [
-      "Buscar productos...",
-      "¡Encuentra lo que necesitas!",
-      "Explora nuestras categorías...",
-      "¡Descubre ofertas increíbles!",
-      "Nunca dejes de buscar",
-    ],
-    favoritesLinkTitle: "Página de favoritos",
-  },
   shared: {
+    navbar: {
+      homeLinkTitle: "Página principal",
+      placeholders: [
+        "Buscar productos...",
+        "¡Encuentra lo que necesitas!",
+        "Explora nuestras categorías...",
+        "¡Descubre ofertas increíbles!",
+        "Nunca dejes de buscar",
+      ],
+      favoritesLinkTitle: "Página de favoritos",
+    },
     addToFavorites: {
       btnCopy: {
         iddle: "Agregar a favoritos",
@@ -38,6 +38,19 @@ const esDictionary: Dictionary = {
       },
       linkToFavorites: "Ver favoritos",
     },
+  },
+  home: {
+    title: "¡Bienvenido!",
+  },
+  favorites: {
+    empty: "Aquí aparecerán los items que guardes como favoritos",
+    title: "Tus favoritos",
+  },
+  search: {
+    notFound: "No se encontraron resultados para tu búsqueda, intenta de nuevo",
+  },
+  item: {
+    notFound: "No se encontró el item que buscabas, intenta de nuevo",
   },
 };
 

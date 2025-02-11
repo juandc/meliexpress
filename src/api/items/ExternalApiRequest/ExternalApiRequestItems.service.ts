@@ -6,7 +6,10 @@ import { ExternalApiRequestItemsData } from "./ExternalApiRequestItems.data";
 
 export class ExternalApiRequestItemsService extends ItemsEntity {
   private _transformCategories(originalCategories: any) {
-    const categories: string[] = originalCategories.map((c: any) => c.name) ?? [];
+    originalCategories ??= [];
+    const categories: string[] = [...originalCategories].map(
+      (c: any) => c.name
+    ) ?? [];
     return categories;
   }
 

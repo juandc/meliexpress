@@ -17,7 +17,7 @@ export const NavBarContainer: FC = () => {
   const router = useRouter();
   const [query, setQuery] = useState(getQueryFromUrl);
   const placeholder = usePlaceholder({
-    placeholders: esDictionary.navbar.placeholders,
+    placeholders: esDictionary.shared.navbar.placeholders,
     shouldMove: query.length <= 0,
   });
 
@@ -43,7 +43,7 @@ export const NavBarContainer: FC = () => {
 
   return (
     <NavBar>
-      <Link href="/" onClick={onReset} title={esDictionary.navbar.homeLinkTitle}>
+      <Link href="/" onClick={onReset} title={esDictionary.shared.navbar.homeLinkTitle}>
         <img src="/Logo_ML@2x.png" />
       </Link>
       <SearchBar
@@ -56,7 +56,7 @@ export const NavBarContainer: FC = () => {
         placeholder={placeholder}
         autoFocus
       />
-      <Link href="/favorites" title={esDictionary.navbar.favoritesLinkTitle}>
+      <Link href="/favorites" title={esDictionary.shared.navbar.favoritesLinkTitle}>
         <img src="/MyList.png" />
       </Link>
     </NavBar>

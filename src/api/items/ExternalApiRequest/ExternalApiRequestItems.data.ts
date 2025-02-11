@@ -21,7 +21,7 @@ export class ExternalApiRequestItemsData {
     const getBiggerKey = (a: string, b: string) => {
       return categoriesResults[a] > categoriesResults[b] ? a : b;
     };
-    const biggerKey = Object.keys(categoriesResults).reduce(getBiggerKey);
+    const biggerKey = Object.keys(categoriesResults).reduce(getBiggerKey, "");
 
     return biggerKey;
   }

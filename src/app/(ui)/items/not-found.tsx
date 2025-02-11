@@ -1,17 +1,12 @@
 'use client';
 
 import { BaseContent } from "@/ui/components/isomorphic";
+import esDictionary from "@/ui/dictionaries/es";
 
-export default function NotFoundSearchPage({
-//   error,
-//   reset,
-// }: {
-//   error: Error & { digest?: string }
-//   reset: () => void
-}) {
+export default function NotFoundSearchPage() {
   return (
     <BaseContent isEmpty>
-      No se encontraron resultados para tu búsqueda, intenta de nuevo
+      {esDictionary.item.notFound}
     </BaseContent>
   );
 }

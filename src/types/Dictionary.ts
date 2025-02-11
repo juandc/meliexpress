@@ -16,12 +16,12 @@ export type Dictionary = {
       title: (title: string) => string;
     };
   };
-  navbar: {
-    homeLinkTitle: string;
-    placeholders: string[];
-    favoritesLinkTitle: string;
-  },
   shared: {
+    navbar: {
+      homeLinkTitle: string;
+      placeholders: string[];
+      favoritesLinkTitle: string;
+    },
     addToFavorites: {
       btnCopy: {
         [key in "iddle" | "saving" | "removing" | "saved" | "error"]: string;
@@ -29,4 +29,17 @@ export type Dictionary = {
       linkToFavorites: string;
     };
   };
+  home: {
+    title: string;
+  };
+  favorites: {
+    title: string;
+    empty: string;
+  };
+  search: {
+    notFound: string;
+  },
+  item: {
+    notFound: string;
+  },
 };
