@@ -9,23 +9,16 @@ import {
   useState,
 } from "react";
 import { NavBar, SearchBar } from "@/ui/components/isomorphic";
+import esDictionary from "@/ui/dictionaries/es";
 import { getQueryFromUrl } from "./utils";
 import { usePlaceholder } from "./usePlaceholder";
-
-const placeholders = [
-  "Buscar productos...",
-  "Encuentra lo que necesitas...",
-  "Explora nuestras categorías...",
-  "Descubre ofertas increíbles...",
-  "Nunca dejes de buscar...",
-];
 
 export const NavBarContainer: FC = () => {
   const router = useRouter();
   const [query, setQuery] = useState(getQueryFromUrl);
   const placeholder = usePlaceholder({
-    placeholders,
-    shouldMove: query.length <= 0
+    placeholders: esDictionary.navbar.placeholders,
+    shouldMove: query.length <= 0,
   });
 
   const onReset = () => {
@@ -50,7 +43,7 @@ export const NavBarContainer: FC = () => {
 
   return (
     <NavBar>
-      <Link href="/" onClick={onReset} title="Página principal">
+      <Link href="/" onClick={onReset} title={esDictionary.navbar.homeLinkTitle}>
         <img src="/Logo_ML@2x.png" />
       </Link>
       <SearchBar
@@ -63,7 +56,7 @@ export const NavBarContainer: FC = () => {
         placeholder={placeholder}
         autoFocus
       />
-      <Link href="/favorites" title="Página de favoritos">
+      <Link href="/favorites" title={esDictionary.navbar.favoritesLinkTitle}>
         <img src="/MyList.png" />
       </Link>
     </NavBar>

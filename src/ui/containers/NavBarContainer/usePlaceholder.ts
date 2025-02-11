@@ -37,6 +37,6 @@ export const usePlaceholder = ({
     }
   }, [charIndex, sentenceIndex, shouldMove]);
 
-  const placeholder = placeholders[sentenceIndex].slice(0, charIndex).trim();
+  const placeholder = placeholders?.[sentenceIndex]?.slice(0, charIndex).trim() || "";
   return placeholder;
 };
