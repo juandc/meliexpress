@@ -4,8 +4,6 @@ import { jsonError } from "@/api/jsonApi";
 import { InMemoryFavoritesService } from "@/api/favorites/favorites.service";
 
 export async function POST(request: Request): Promise<NextResponse<unknown>> {
-  console.log("******************************");
-  console.log("POST /api/favorites/add");
   try {
     const body = await request.json() as DetailedItem;
     if (!body.id) {

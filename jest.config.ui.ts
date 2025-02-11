@@ -14,6 +14,7 @@ const config: Config = {
   collectCoverage: true,
   coverageDirectory: "coverage",
   coverageProvider: "v8",
+  coveragePathIgnorePatterns: ["./src/ui/dictionaries"],
   moduleNameMapper: {
     '^@/(.*)$': '<rootDir>/src/$1',
   },

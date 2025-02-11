@@ -33,7 +33,7 @@ const esDictionary: Dictionary = {
         iddle: "Agregar a favoritos",
         saving: "Guardando...",
         removing: "Eliminando...",
-        saved: "¡Guardado!",
+        saved: "Eliminar de favoritos",
         error: "Error, intentar de nuevo",
       },
       linkToFavorites: "Ver favoritos",

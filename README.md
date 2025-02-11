@@ -325,7 +325,7 @@ UI
 - [ ] UI Tests
   - [x] Components
   - [x] Containers
-  - [ ] Pages
+  - [ ] Pages (wont do, e2e instead)
   - [ ] A11Y (manual)
 - [ ] Debounce Search Bar Previews
 - [ ] Optimistic UI (favorites delete, abort notification?)
@@ -347,6 +347,6 @@ API
 
 General
 
-- [ ] Deploy
+- [x] Deploy
 - [x] Final work docs
-- [ ] E2E Tests
+- [x] E2E Tests (most important flows)

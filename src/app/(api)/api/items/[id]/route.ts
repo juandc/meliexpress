@@ -10,7 +10,7 @@ export async function GET(
 ): Promise<NextResponseApi<ItemApi>> {
   try {
     const id = (await params).id;
-    console.log("GET /api/items/[id]", {id});
+    // Uncomment to simulate delay (to show the skeleton loading state?):
     // await new Promise((resolve) => setTimeout(resolve, 3000));
     if (!id) {
       return NextResponse.json(jsonError("Invalid Item ID"), { status: 400 });
