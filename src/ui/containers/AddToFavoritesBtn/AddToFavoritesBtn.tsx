@@ -54,6 +54,7 @@ export const AddToFavoritesBtn: FC<Props> = (props) => {
 
   const variant = (status === "saved" || status === "error") ? "danger" : "secondary";
   const disabled = status === "removing" || status === "saving";
+  console.log("AddToFavoritesBtn", { status, disabled });
 
   return (
     <>

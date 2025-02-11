@@ -19,7 +19,11 @@ export const SearchResult: FC<Props> = ({
   const containerClasses = `${classes.SearchResult} ${isFirst && classes.SearchResult__first}`;
 
   return (
-    <article className={containerClasses}>
+    <article
+      className={containerClasses}
+      data-testid="SearchResult"
+      id={props.id}
+    >
       <Link href={href}>
         <figure>
           <img src={props.picture} alt={props.title} />

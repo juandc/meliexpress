@@ -1,9 +1,9 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
+import type { PropsWithChildren } from "react";
 import { getIdFromSlug } from "@/ui/utils/pathUtils";
 import { clipItemTitle } from "@/ui/utils/format";
 import { getItem } from "@/ui/services/getItem";
-import { PropsWithChildren } from "react";
 
 type NextProps = {
   params: Promise<{ slug: string }>

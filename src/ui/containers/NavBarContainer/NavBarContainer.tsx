@@ -50,10 +50,11 @@ export const NavBarContainer: FC = () => {
 
   return (
     <NavBar>
-      <Link href="/" onClick={onReset}>
+      <Link href="/" onClick={onReset} title="Página principal">
         <img src="/Logo_ML@2x.png" />
       </Link>
       <SearchBar
+        id="search_bar_input"
         type="text"
         value={query}
         onInputChange={onChange}
@@ -62,7 +63,7 @@ export const NavBarContainer: FC = () => {
         placeholder={placeholder}
         autoFocus
       />
-      <Link href="/favorites">
+      <Link href="/favorites" title="Página de favoritos">
         <img src="/MyList.png" />
       </Link>
     </NavBar>
