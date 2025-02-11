@@ -2,6 +2,34 @@
 
 Clon de MercadoLibre usando React.js y Next.js para buscar, visualizar y guardar (como favoritos) productos.
 
+## Instrucciones
+
+Para instalar dependencias:
+
+```bash
+npm install
+```
+
+Para correr el proyecto localmente:
+
+```bash
+npm run dev
+```
+
+Para crear la versión de producción:
+
+```bash
+npm run build
+npm run start
+```
+
+Para correr las pruebas:
+
+```bash
+npm run test:e2e # Pruebas E2E
+npm run test:ui # Pruebas unitarias a los componentes front
+npm run test:api # Pruebas unitarias a la API
+```
 
 ##  Páginas a Implementar
 
@@ -326,7 +354,9 @@ UI
   - [x] Components
   - [x] Containers
   - [ ] Pages (wont do, e2e instead)
-  - [ ] A11Y (manual)
+  - [x] a11y
+    - [x] Lighthouse
+    - [x] Manual
 - [ ] Debounce Search Bar Previews
 - [ ] Optimistic UI (favorites delete, abort notification?)
 - [ ] Image Modal

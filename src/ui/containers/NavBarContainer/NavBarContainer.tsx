@@ -44,7 +44,10 @@ export const NavBarContainer: FC = () => {
   return (
     <NavBar>
       <Link href="/" onClick={onReset} title={esDictionary.shared.navbar.homeLinkTitle}>
-        <img src="/Logo_ML@2x.png" />
+        <img
+          src="/Logo_ML@2x.png"
+          alt={esDictionary.shared.navbar.homeLinkTitle}
+        />
       </Link>
       <SearchBar
         id="search_bar_input"
@@ -57,7 +60,10 @@ export const NavBarContainer: FC = () => {
         autoFocus
       />
       <Link href="/favorites" title={esDictionary.shared.navbar.favoritesLinkTitle}>
-        <img src="/MyList.png" />
+        <img
+          src="/MyList.png"
+          alt={esDictionary.shared.navbar.favoritesLinkTitle}
+        />
       </Link>
     </NavBar>
   );
