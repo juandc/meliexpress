@@ -1,17 +1,19 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { NavBarContainer } from "@/ui/containers/NavBarContainer";
+import { getDictionaryFromServer } from "@/ui/dictionaries";
 import "./globals.css";
+
+export async function generateMetadata(): Promise<Metadata> {
+  const dictionary = await getDictionaryFromServer();
+  const { title, description } = dictionary.meta.default;
+  return { title, description };
+}
 
 const montserrat = Montserrat({
   variable: "--font-montserrat",
   subsets: ["latin"],
 });
-
-export const metadata: Metadata = {
-  title: "MeliExpress: una versión lite de Mercado Libre",
-  description: "Encuentra todos los productos que necesitas y guárdalos como favoritos.",
-};
 
 export default function RootLayout({
   children,
