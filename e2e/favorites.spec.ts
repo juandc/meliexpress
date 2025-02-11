@@ -1,4 +1,9 @@
 import { test, expect } from '@playwright/test';
+import esDictionary from "@/ui/dictionaries/es";
+
+const navCopy = esDictionary.navbar;
+const favoritesCopy = esDictionary.shared.addToFavorites;
+const btnCopys = favoritesCopy.btnCopy;
 
 test('adding product to favorites from search results', async ({ page }) => {
   await page.goto('/search/laptop');
@@ -7,21 +12,21 @@ test('adding product to favorites from search results', async ({ page }) => {
 
   // save to favorites
   const favoriteBtn = await page.getByRole('button', {
-    name: 'Agregar a favoritos',
+    name: btnCopys.iddle,
   }).first();
   await favoriteBtn.click();
   const loadingBtn = await page.getByRole('button', {
-    name: 'Agregando...',
+    name: btnCopys.saving,
   }).first();
   await expect(loadingBtn).toBeVisible();
   await new Promise((resolve) => setTimeout(resolve, 100));
   const deleteBtn = await page.getByRole('button', {
-    name: 'Eliminar de favoritos',
+    name: btnCopys.saved,
   }).first();
   await expect(deleteBtn).toBeVisible();
 
   // navigate to favorites page and validate its not empty
-  await page.getByRole('link', { name: 'Página de favoritos' }).click();
+  await page.getByRole('link', { name: navCopy.favoritesLinkTitle }).click();
   const favoritesPageTitle = await page.getByRole('heading', {
     name: 'Tus favoritos',
   });
@@ -36,25 +41,24 @@ test('adding product to favorites from product detail', async ({ page }) => {
   await page.goto('/items/nintendo-wii-512mb-sports-pack-MLA1428983989');
   const main = await page.getByRole('main');
   const itemId = await main.getByRole('article').first().getAttribute('id');
-  console.log('itemId', itemId);
 
   // save to favorites
   const favoriteBtn = await page.getByRole('button', {
-    name: 'Agregar a favoritos',
+    name: btnCopys.iddle,
   }).first();
   await favoriteBtn.click();
   const loadingBtn = await page.getByRole('button', {
-    name: 'Agregando...',
+    name: btnCopys.saving,
   }).first();
   await expect(loadingBtn).toBeVisible();
   await new Promise((resolve) => setTimeout(resolve, 100));
   const deleteBtn = await page.getByRole('button', {
-    name: 'Eliminar de favoritos',
+    name: btnCopys.saved,
   }).first();
   await expect(deleteBtn).toBeVisible();
 
   // navigate to favorites page and validate its not empty
-  await page.getByRole('link', { name: 'Página de favoritos' }).click();
+  await page.getByRole('link', { name: favoritesCopy.linkToFavorites }).click();
   const favoritesPageTitle = await page.getByRole('heading', {
     name: 'Tus favoritos',
   });

@@ -21,4 +21,12 @@ export type Dictionary = {
     placeholders: string[];
     favoritesLinkTitle: string;
   },
+  shared: {
+    addToFavorites: {
+      btnCopy: {
+        [key in "iddle" | "saving" | "removing" | "saved" | "error"]: string;
+      };
+      linkToFavorites: string;
+    };
+  };
 };

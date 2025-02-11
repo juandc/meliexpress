@@ -1,12 +1,15 @@
 "use client";
 
 import { type MouseEventHandler, useState, type FC, type ComponentProps } from "react";
-import type { BaseItem } from "@/types";
+import type { BaseItem, Dictionary } from "@/types";
 import { saveFavoriteItem } from "@/ui/services/saveFavoriteItem";
 import { removeFavoriteItem } from "@/ui/services/removeFavoriteItem";
 import { Button, Anchor } from "@/ui/components/isomorphic";
+import esDictionary from "@/ui/dictionaries/es";
 
-type Status = "iddle" | "saving" | "removing" | "saved" | "error";
+const copys = esDictionary.shared.addToFavorites;
+
+type Status = keyof Dictionary["shared"]["addToFavorites"]["btnCopy"];
 
 type Props = BaseItem & {
   size?: ComponentProps<typeof Button>["size"];
@@ -54,7 +57,6 @@ export const AddToFavoritesBtn: FC<Props> = (props) => {
 
   const variant = (status === "saved" || status === "error") ? "danger" : "secondary";
   const disabled = status === "removing" || status === "saving";
-  console.log("AddToFavoritesBtn", { status, disabled });
 
   return (
     <>
@@ -64,11 +66,7 @@ export const AddToFavoritesBtn: FC<Props> = (props) => {
         disabled={disabled}
         size={props.size}
       >
-        {status === "iddle" && "Agregar a Favoritos"}
-        {status === "saving" && "Agregando..."}
-        {status === "saved" && "Eliminar de favoritos"}
-        {status === "removing" && "Eliminando..."}
-        {status === "error" && "Error, intentar de nuevo"}
+        {copys.btnCopy[status]}
       </Button>
 
       {(withLink && status === "saved") && (
@@ -76,7 +74,7 @@ export const AddToFavoritesBtn: FC<Props> = (props) => {
           variant="ghost"
           href="/favorites"
           size={props.size}
-        >Ver favoritos</Anchor>
+        >{copys.linkToFavorites}</Anchor>
       )}
     </>
   );

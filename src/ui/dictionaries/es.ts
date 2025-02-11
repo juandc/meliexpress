@@ -27,6 +27,18 @@ const esDictionary: Dictionary = {
     ],
     favoritesLinkTitle: "Página de favoritos",
   },
+  shared: {
+    addToFavorites: {
+      btnCopy: {
+        iddle: "Agregar a favoritos",
+        saving: "Guardando...",
+        removing: "Eliminando...",
+        saved: "¡Guardado!",
+        error: "Error, intentar de nuevo",
+      },
+      linkToFavorites: "Ver favoritos",
+    },
+  },
 };
 
 export default esDictionary;

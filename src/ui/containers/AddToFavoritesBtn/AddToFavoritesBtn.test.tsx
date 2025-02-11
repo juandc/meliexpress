@@ -1,10 +1,14 @@
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
 import { act } from "react";
-import { AddToFavoritesBtn } from "./AddToFavoritesBtn";
 import { itemMock } from "@/mocks/itemMock";
 import * as saveService from "@/ui/services/saveFavoriteItem";
 import * as removeService from "@/ui/services/removeFavoriteItem";
+import esDictionary from "@/ui/dictionaries/es";
+import { AddToFavoritesBtn } from "./AddToFavoritesBtn";
+
+const copys = esDictionary.shared.addToFavorites;
+const btnCopys = copys.btnCopy;
 
 jest.mock("@/ui/services/saveFavoriteItem", () => ({
   saveFavoriteItem: jest.fn(() => Promise.resolve(true)),
@@ -31,7 +35,7 @@ describe("AddToFavoritesBtn", () => {
   it("if not favorite, starts adding to favorites", () => {
     render(<AddToFavoritesBtn {...itemMock.item} />);
     const btn = screen.getByRole("button");
-    expect(btn).toHaveTextContent("Agregar a Favoritos");
+    expect(btn).toHaveTextContent(btnCopys.iddle);
   });
 
   it("changes to saving on click", async () => {
@@ -41,7 +45,7 @@ describe("AddToFavoritesBtn", () => {
     render(<AddToFavoritesBtn {...itemMock.item} />);
     const btn = screen.getByRole("button");
     await act(async () => { await fireEvent.click(btn) });
-    expect(btn).toHaveTextContent("Agregando...");
+    expect(btn).toHaveTextContent(btnCopys.saving);
   });
 
   it("changes to delete when saving completes", async () => {
@@ -54,18 +58,18 @@ describe("AddToFavoritesBtn", () => {
       await fireEvent.click(btn);
       await new Promise(resolve => setTimeout(() => resolve(true), 10));
     });
-    expect(btn).toHaveTextContent("Eliminar de favoritos");
-    const link = screen.getByText("Ver favoritos");
+    expect(btn).toHaveTextContent(btnCopys.saved);
+    const link = screen.getByText(copys.linkToFavorites);
     expect(link).toBeInTheDocument();
   });
 
   it("if favorite, starts removing from favorites and displaying favorites link", async () => {
     render(<AddToFavoritesBtn {...itemMock.item} favorite={true} />);
     const btn = screen.getByRole("button");
-    expect(btn).toHaveTextContent("Eliminar de favoritos");
+    expect(btn).toHaveTextContent(btnCopys.saved);
     const link = screen.getByRole("link");
     expect(link).toBeInTheDocument();
-    expect(link).toHaveTextContent("Ver favoritos");
+    expect(link).toHaveTextContent(copys.linkToFavorites);
   });
 
   it("changes to removing on click", async () => {
@@ -75,8 +79,8 @@ describe("AddToFavoritesBtn", () => {
     render(<AddToFavoritesBtn {...itemMock.item} favorite />);
     const btn = screen.getByRole("button");
     await act(async () => { await fireEvent.click(btn); });
-    expect(btn).toHaveTextContent("Eliminando...");
-    const link = screen.queryByText("Ver favoritos");
+    expect(btn).toHaveTextContent(btnCopys.removing);
+    const link = screen.queryByText(copys.linkToFavorites);
     expect(link).toBeNull();
   });
 
@@ -90,7 +94,7 @@ describe("AddToFavoritesBtn", () => {
       await fireEvent.click(btn);
       await new Promise(resolve => setTimeout(() => resolve(true), 10));
     });
-    expect(btn).toHaveTextContent("Agregar a Favoritos");
+    expect(btn).toHaveTextContent(btnCopys.iddle);
   });
 
   it("changes to error on saving error", async () => {
@@ -100,7 +104,7 @@ describe("AddToFavoritesBtn", () => {
     render(<AddToFavoritesBtn {...itemMock.item} />);
     const btn = screen.getByRole("button");
     await act(async () => { await fireEvent.click(btn) });
-    expect(btn).toHaveTextContent("Error, intentar de nuevo");
+    expect(btn).toHaveTextContent(btnCopys.error);
     await act(async () => { await fireEvent.click(btn) });
     expect(window.location.reload).toHaveBeenCalled();
   });
@@ -112,7 +116,7 @@ describe("AddToFavoritesBtn", () => {
     render(<AddToFavoritesBtn {...itemMock.item} />);
     const btn = screen.getByRole("button");
     await act(async () => { await fireEvent.click(btn); });
-    expect(btn).toHaveTextContent("Error, intentar de nuevo");
+    expect(btn).toHaveTextContent(btnCopys.error);
     await act(async () => { await fireEvent.click(btn) });
     expect(window.location.reload).toHaveBeenCalled();
   });
@@ -124,7 +128,7 @@ describe("AddToFavoritesBtn", () => {
     render(<AddToFavoritesBtn {...itemMock.item} favorite />);
     const btn = screen.getByRole("button");
     await act(async () => { await fireEvent.click(btn); });
-    expect(btn).toHaveTextContent("Error, intentar de nuevo");
+    expect(btn).toHaveTextContent(btnCopys.error);
     await act(async () => { await fireEvent.click(btn); });
     expect(window.location.reload).toHaveBeenCalled();
   });
@@ -136,7 +140,7 @@ describe("AddToFavoritesBtn", () => {
     render(<AddToFavoritesBtn {...itemMock.item} favorite />);
     const btn = screen.getByRole("button");
     await act(async () => { await fireEvent.click(btn) });
-    expect(btn).toHaveTextContent("Error, intentar de nuevo");
+    expect(btn).toHaveTextContent(btnCopys.error);
   });
 
   it("propagates sm class to button", () => {
