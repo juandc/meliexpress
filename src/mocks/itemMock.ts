@@ -10,7 +10,7 @@ export const itemMock: ItemApiData = {
       amount: 1000,
       decimals: 0,
     },
-    picture: "https://via.placeholder.com/200x200",
+    picture: "https://http2.mlstatic.com/D_Q_NP_2X_789308-MLC48132800800_112021-AB.webp",
     condition: "new",
     free_shipping: true,
     sold_quantity: 0,
