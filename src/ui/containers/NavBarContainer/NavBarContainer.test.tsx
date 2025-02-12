@@ -11,6 +11,9 @@ const navCopys = esDictionary.shared.navbar;
 
 jest.useFakeTimers();
 
+const open = jest.fn()
+Object.defineProperty(window, 'open', open);
+
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
   usePathname: jest.fn(),
@@ -262,7 +265,7 @@ describe("NavBarContainer", () => {
       fireEvent.change(input, { target: { value: query } });
       await act(async () => jest.advanceTimersByTime(2000));
       const previewItem = screen.getByTitle(searchMock.items[0].title);
-      const href = previewItem.getAttribute("href");
+      const href = previewItem.getAttribute("data-previewlink");
       const expectedHref = getItemHref(searchMock.items[0].title, searchMock.items[0].id);
       expect(href).toBe(expectedHref);
     });

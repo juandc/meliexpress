@@ -1,7 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 
-import Link from "next/link";
-import { type FocusEventHandler, type ComponentProps, type FC } from "react";
+import { type FocusEventHandler, type ComponentProps, type FC, type MouseEventHandler } from "react";
 import type { BaseItem } from "@/types";
 import esDictionary from "@/ui/dictionaries/es";
 import { clipItemTitle, getItemHref } from "@/ui/utils/format";
@@ -28,7 +27,7 @@ type Props = Omit<InputBarProps, InputOmitProps> & {
   };
   preview?: {
     items: BaseItem[];
-    onClick?: () => void;
+    onClick?: MouseEventHandler<HTMLElement>;
   };
 };
 
@@ -76,6 +75,7 @@ export const SearchBar: FC<Props> = ({
                 data-suggestionopt="true"
                 title={opt}
                 onBlur={onBlur}
+                tabIndex={0}
               >
                 {!props.value && opt}
 
@@ -94,13 +94,14 @@ export const SearchBar: FC<Props> = ({
         {preview && (
           <div className={classes.Preview} data-testid="searchbar-preview">
             {preview.items.map((item, index) => (
-              <Link
+              <button
                 key={index}
                 className={classes.Preview_item}
-                href={getItemHref(item.title, item.id)}
                 onClick={preview.onClick}
                 data-previewitem="true"
+                data-previewlink={getItemHref(item.title, item.id)}
                 title={item.title}
+                tabIndex={0}
               >
                 <figure>
                   <img src={item.picture} alt={item.title} />
@@ -109,7 +110,7 @@ export const SearchBar: FC<Props> = ({
                   <p>{clipItemTitle(item.title)}</p>
                   <Price {...item.price} />
                 </div>
-              </Link>
+              </button>
             ))}
           </div>
         )}
@@ -129,6 +130,7 @@ export const SearchBar: FC<Props> = ({
       }}
       ref={btnRef}
       title={esDictionary.shared.navbar.searchBtnTitle}
+      tabIndex={0}
     >
       <img src="/ic_Search@2x.png" alt={esDictionary.shared.navbar.searchBtnTitle} />
     </button>

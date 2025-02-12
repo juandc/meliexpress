@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Montserrat } from "next/font/google";
 import { NavBarContainer } from "@/ui/containers/NavBarContainer";
+import { ProgressBar } from "@/ui/components/client-only/ProgressBar";
 import { getDictionaryFromServer } from "@/ui/dictionaries";
 import "./globals.css";
 
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
     <html lang="es">
       <body className={`${montserrat.variable}`}>
+        <ProgressBar />
         <NavBarContainer />
         <main className="main">
           {children}

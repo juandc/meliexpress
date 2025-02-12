@@ -9,12 +9,12 @@ import {
   type FC,
   type FocusEventHandler,
   type KeyboardEvent,
+  type MouseEvent,
   useEffect,
   useMemo,
   useRef,
   useState,
 } from "react";
-import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 import { NavBar, SearchBar } from "@/ui/components/isomorphic";
 import esDictionary from "@/ui/dictionaries/es";
 import { useWritingPlaceholder } from "@/ui/hooks/useWritingPlaceholder";
@@ -92,21 +92,29 @@ export const NavBarContainer: FC = () => {
     }
   };
 
+  const onOptionSelect = (option: string) => {
+    setQuery(option);
+    if (typeof window !== "undefined") {
+      inputRef.current?.focus();
+    }
+  };
+
   const boxProps = useMemo(() => {
     const options = realQuery.length ? suggestions.filter((sug) => sug.includes(realQuery)) : suggestions;
     return {
       suggestions: {
         options,
-        onSelect: (option: string) => {
-          setQuery(option);
-          if (typeof window !== "undefined") {
-            inputRef.current?.focus();
-          }
-        },
+        onSelect: onOptionSelect,
       },
       preview: {
         items: previewItems,
-        onClick: () => {
+        onClick: (e: MouseEvent<HTMLElement>) => {
+          const newUrl = `/items?search=${realQuery}`;
+          if (e.ctrlKey || e.metaKey) {
+            window?.open?.(newUrl, '_blank');
+          } else {
+            router.push(newUrl);
+          }
           setIsOpenBox(false);
         },
       },
@@ -121,12 +129,6 @@ export const NavBarContainer: FC = () => {
 
   return (
     <NavBar>
-      <ProgressBar
-        height="4px"
-        color="#3483FA"
-        options={{ showSpinner: false }}
-        shallowRouting
-      />
       <Link href="/" onClick={reset} title={esDictionary.shared.navbar.homeLinkTitle}>
         <img
           src="/Logo_ML@2x.png"

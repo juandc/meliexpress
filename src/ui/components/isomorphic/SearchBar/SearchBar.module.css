@@ -101,7 +101,11 @@
   width: 100%;
 }
 .Preview_item {
+  background-color: transparent;
+  border: none;
   color: inherit;
+  cursor: pointer;
+  text-align: left;
   text-decoration: none;
   display: flex;
   align-items: center;
