@@ -66,8 +66,8 @@ export const NavBarContainer: FC = () => {
   const onBlur: FocusEventHandler<HTMLElement> = (e) => {
     const { preventDefault, relatedTarget } = e;
     if (
-      relatedTarget?.getAttribute("data-suggestionopt") === "true"
-      || relatedTarget?.getAttribute("data-previewitem") === "true"
+      relatedTarget?.getAttribute?.("data-suggestionopt") === "true"
+      || relatedTarget?.getAttribute?.("data-previewitem") === "true"
     ) {
       preventDefault();
     } else {

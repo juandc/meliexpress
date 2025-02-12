@@ -20,6 +20,7 @@ export type Dictionary = {
     navbar: {
       homeLinkTitle: string;
       placeholders: string[];
+      searchBtnTitle: string;
       favoritesLinkTitle: string;
     },
     addToFavorites: {

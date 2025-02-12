@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { type FocusEventHandler, type ComponentProps, type FC } from "react";
 import type { BaseItem } from "@/types";
+import esDictionary from "@/ui/dictionaries/es";
 import { InputBar } from "@/ui/components/isomorphic";
 import classes from "./SearchBar.module.css";
 
@@ -71,6 +72,7 @@ export const SearchBar: FC<Props> = ({
                 className={classes.Suggestions_opt}
                 onClick={() => suggestions.onSelect?.(opt)}
                 data-suggestionopt="true"
+                title={opt}
                 onBlur={onBlur}
               >
                 {!props.value && opt}
@@ -96,6 +98,7 @@ export const SearchBar: FC<Props> = ({
                 href={`/items/${item.id}`}
                 onClick={preview.onClick}
                 data-previewitem="true"
+                title={item.title}
               >
                 <figure>
                   <img src={item.picture} alt={item.title} />
@@ -111,7 +114,6 @@ export const SearchBar: FC<Props> = ({
       </div>
     )}
 
-
     <button
       type="button"
       className={`
@@ -124,8 +126,9 @@ export const SearchBar: FC<Props> = ({
         onBtnBlur?.(e);
       }}
       ref={btnRef}
+      title={esDictionary.shared.navbar.searchBtnTitle}
     >
-      <img src="/ic_Search@2x.png" alt="Buscar" />
+      <img src="/ic_Search@2x.png" alt={esDictionary.shared.navbar.searchBtnTitle} />
     </button>
   </div>
 );

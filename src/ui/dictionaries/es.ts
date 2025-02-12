@@ -26,6 +26,7 @@ const esDictionary: Dictionary = {
         "¡Descubre ofertas increíbles!",
         "Nunca dejes de buscar",
       ],
+      searchBtnTitle: "Buscar",
       favoritesLinkTitle: "Página de favoritos",
     },
     addToFavorites: {
