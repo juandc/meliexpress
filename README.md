@@ -343,6 +343,14 @@ deciden implementar tests).
 >
 > Se agregó una caja con filtrado de las últimas búsquedas del usuario (en local storage) y algunos resultados de la hipotética búsqueda. Se usó debouncing para evitar requests innecesarios a la API por cada cambio del usuario en el valor del input. Todo se implementó de forma que sea muy fácil para front hacer la migración a otra fuente de datos para recibir las últimas búsquedas.
 >
+> 👀
+>
+> Honestamente mi primer approach fue usar alguna primitiva de [Radix UI](https://www.radix-ui.com/primitives), pues recordaba alguna vez haber visto una solución que encajaba con lo que buscaba. Pero al no encontrarlo rápido y quedar ya poco tiempo para la entrega, decidí no invertir más tiempo en el research e implementarlo yo mismo.
+>
+> ¡Qué error!
+>
+> Aunque finalmente lo resolví, me tomó mucho más tiempo del deseado garantizar una buena accesibilidad al no haber considerado  varios casos "extraños" en los que la experiencia era gravemente afectada. De haber tomado un poco más de tiempo habría logrado encontrar soluciones más estándares ([Radix UI + Ariakit](https://ariakit.org/examples/combobox-radix)) que resolvían todos estos problemas (incluso mejor de lo que yo lo hice) sin reinventar la rueda. Lección para la próxima.
+>
 > - **Micro-transiciones**
 >
 > Aunque no son animaciones especialmente complejas, se agregaron algunos suaves y sencillos cambios de estilo en diferentes elementos al recibir interacción de los usuarios, principalmente buscando indicar que son elementos clickeables y que por lo tanto causan alguna reacción en la aplicación.

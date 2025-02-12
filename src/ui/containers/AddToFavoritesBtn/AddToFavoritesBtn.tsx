@@ -65,6 +65,7 @@ export const AddToFavoritesBtn: FC<Props> = (props) => {
         onClick={onClick}
         disabled={disabled}
         size={props.size}
+        data-prevent-nprogress={true}
       >
         {copys.btnCopy[status]}
       </Button>

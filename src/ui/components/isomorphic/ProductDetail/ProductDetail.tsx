@@ -1,3 +1,5 @@
+/* eslint-disable @next/next/no-img-element */
+
 import { type ReactNode, type FC } from "react";
 import type { DetailedItem } from "@/types";
 import { Button } from "../Button/Button";
@@ -30,7 +32,7 @@ export const ProductDetail: FC<Props> = ({
         {additionalDataEl}
       </div>
 
-      {props.description.length > 0 && (
+      {props.description?.length > 0 && (
         <div className={classes.ProductDetail_desc}>
           <h2>Descripción del Producto</h2>
           {/* TODO: markdown */}

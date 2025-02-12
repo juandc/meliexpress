@@ -99,6 +99,22 @@ export const NavBarContainer: FC = () => {
     }
   };
 
+  const onPreviewClick = (e: MouseEvent<HTMLElement>) => {
+    if (typeof window === "undefined") return;
+    const previewLink = e.currentTarget.getAttribute("data-previewlink") ?? "";
+    const baseUrl = window.location.origin;
+    const newUrl = previewLink.length
+      ? previewLink
+      : `/items?search=${realQuery}`;
+    if (!previewLink) return;
+    if (e.ctrlKey || e.metaKey) {
+      window?.open?.(`${baseUrl}/${newUrl}`, '_blank');
+    } else {
+      router.push(newUrl);
+    }
+    setIsOpenBox(false);
+  };
+
   const boxProps = useMemo(() => {
     const options = realQuery.length ? suggestions.filter((sug) => sug.includes(realQuery)) : suggestions;
     return {
@@ -108,15 +124,7 @@ export const NavBarContainer: FC = () => {
       },
       preview: {
         items: previewItems,
-        onClick: (e: MouseEvent<HTMLElement>) => {
-          const newUrl = `/items?search=${realQuery}`;
-          if (e.ctrlKey || e.metaKey) {
-            window?.open?.(newUrl, '_blank');
-          } else {
-            router.push(newUrl);
-          }
-          setIsOpenBox(false);
-        },
+        onClick: onPreviewClick,
       },
     };
   }, [suggestions, previewItems, realQuery]);
