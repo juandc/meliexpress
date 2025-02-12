@@ -25,7 +25,7 @@ export const NavBarContainer: FC = () => {
   const pathname = usePathname();
   const router = useRouter();
 
-  const { query, debouncedQuery, setQuery } = useDebouncedQuery(300);
+  const { query, realQuery, debouncedQuery, setQuery } = useDebouncedQuery(300);
   const placeholder = useWritingPlaceholder({
     placeholders: esDictionary.shared.navbar.placeholders,
     shouldMove: query.length <= 0,
@@ -50,10 +50,10 @@ export const NavBarContainer: FC = () => {
   };
 
   const navigateToSearchResults = () => {
-    if (query.length) {
-      saveSuggestions(query);
+    if (realQuery.length) {
+      saveSuggestions(realQuery);
       setIsOpenBox(false);
-      router.push(`/items?search=${query}`);
+      router.push(`/items?search=${realQuery}`);
       btnRef.current?.focus();
       btnRef.current?.blur();
     }
@@ -92,7 +92,7 @@ export const NavBarContainer: FC = () => {
   };
 
   const boxProps = useMemo(() => {
-    const options = query.length ? suggestions.filter((sug) => sug.includes(query)) : suggestions;
+    const options = realQuery.length ? suggestions.filter((sug) => sug.includes(realQuery)) : suggestions;
     return {
       suggestions: {
         options,
@@ -110,7 +110,7 @@ export const NavBarContainer: FC = () => {
         },
       },
     };
-  }, [suggestions, previewItems, query]);
+  }, [suggestions, previewItems, realQuery]);
 
   useEffect(() => {
     if (isOpenBox) {

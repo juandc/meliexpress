@@ -9,7 +9,8 @@ export const useDebouncedQuery = (delay: number) => {
   const realDebouncedQuery = debouncedQuery.trim();
 
   return {
-    query: realQuery,
+    query,
+    realQuery,
     debouncedQuery: realDebouncedQuery,
     setQuery,
   };
