@@ -1,7 +1,7 @@
 import Link from "next/link";
 import { type ReactNode, type FC } from "react";
 import type { BaseItem } from "@/types";
-import { getItemShortTitle, getItemHref } from "./utils";
+import { clipItemTitle, getItemHref } from "@/ui/utils/format";
 import classes from "./SearchResult.module.css";
 
 type Props = BaseItem & {
@@ -15,7 +15,7 @@ export const SearchResult: FC<Props> = ({
   ...props
 }) => {
   const href = getItemHref(props.title, props.id);
-  const mobileTitle = getItemShortTitle(props.title);
+  const mobileTitle = clipItemTitle(props.title);
   const containerClasses = `${classes.SearchResult} ${isFirst && classes.SearchResult__first}`;
 
   return (

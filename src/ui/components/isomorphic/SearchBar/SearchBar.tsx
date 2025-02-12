@@ -6,6 +6,7 @@ import type { BaseItem } from "@/types";
 import esDictionary from "@/ui/dictionaries/es";
 import { InputBar } from "@/ui/components/isomorphic";
 import classes from "./SearchBar.module.css";
+import { clipItemTitle, getItemHref } from "@/ui/utils/format";
 
 type InputBarProps = ComponentProps<typeof InputBar>;
 type InputOmitProps = "onBlur" | "onChange" | "onClick" | "autoComplete";
@@ -95,7 +96,7 @@ export const SearchBar: FC<Props> = ({
               <Link
                 key={index}
                 className={classes.Preview_item}
-                href={`/items/${item.id}`}
+                href={getItemHref(item.title, item.id)}
                 onClick={preview.onClick}
                 data-previewitem="true"
                 title={item.title}
@@ -104,7 +105,7 @@ export const SearchBar: FC<Props> = ({
                   <img src={item.picture} alt={item.title} />
                 </figure>
                 <div>
-                  <span>{item.title}</span>
+                  <span>{clipItemTitle(item.title)}</span>
                   <span>$ {item.price.amount}</span>
                 </div>
               </Link>

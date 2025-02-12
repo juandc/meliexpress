@@ -7,3 +7,15 @@ export const clipItemTitle = (
   const clipped = title.slice(0, withElipsis ? length - 3 : length);
   return `${clipped}${withElipsis ? "..." : ""}`;
 };
+
+export const getItemHref = (title: string, id: string) => {
+  let href = "/items/";
+  if (title) {
+    const shortTitle = clipItemTitle(title, false, 30).trim();
+    const urlTitle = shortTitle.toLowerCase().replaceAll(" ", "-");
+    href += encodeURIComponent(urlTitle);
+    href += '-';
+  }
+  href += id;
+  return href;
+};

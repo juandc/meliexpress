@@ -98,7 +98,6 @@
 .Preview {
   display: flex;
   flex-direction: column;
-  gap: .5rem;
   width: 100%;
 }
 .Preview_item {
@@ -110,6 +109,14 @@
   padding: 0.5rem .75rem;
   min-height: 48px;
   width: 100%;
+}
+.Preview_item:focus,
+.Preview_item:focus-visible,
+.Preview_item:focus-within {
+  outline: none;
+  border: 2px solid var(--blue);
+  background-color: #fff;
+  color: var(--blue);
 }
 .Preview_item:hover {
   background-color: var(--blue);

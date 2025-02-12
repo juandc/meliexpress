@@ -14,12 +14,13 @@ import {
   useRef,
   useState,
 } from "react";
+import type { BaseItem } from "@/types";
 import { NavBar, SearchBar } from "@/ui/components/isomorphic";
 import esDictionary from "@/ui/dictionaries/es";
 import { useWritingPlaceholder } from "@/ui/hooks/useWritingPlaceholder";
+import { getSearchResults } from "@/ui/services/getSearchResults";
 import { useDebouncedQuery } from "./useDebouncedQuery";
 import { useSuggestions } from "./useSuggestions";
-import { usePreviewItems } from "./usePreviewItems";
 
 export const NavBarContainer: FC = () => {
   const pathname = usePathname();
@@ -38,8 +39,7 @@ export const NavBarContainer: FC = () => {
     saveSuggestions,
   } = useSuggestions(debouncedQuery);
   // const [suggestions, setSuggestions] = useState<string[]>([]);
-  const { previewItems, getPreviewItems } = usePreviewItems(debouncedQuery);
-  // const [previewItems, setPreviewItems] = useState<BaseItem[]>([]);
+  const [previewItems, setPreviewItems] = useState<BaseItem[]>([]);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -57,11 +57,11 @@ export const NavBarContainer: FC = () => {
   //   await saveLsSuggestions(suggestion);
   // };
 
-  // const getPreview = async () => {
-  //   if (!query.length) return;
-  //   const res = await getSearchResults(debouncedQuery);
-  //   setPreviewItems(res.data.items.slice(0, 2));
-  // };
+  const getPreview = async () => {
+    if (!query.length) return;
+    const res = await getSearchResults(debouncedQuery);
+    setPreviewItems(res.data.items.slice(0, 2));
+  };
 
   const navigateToSearchResults = () => {
     if (query.length) {
@@ -124,11 +124,11 @@ export const NavBarContainer: FC = () => {
         },
       },
     };
-  }, [suggestions, previewItems, query]);
+  }, [suggestions, query]);
 
   useEffect(() => {
     if (isOpenBox) {
-      Promise.all([getSuggestions(), getPreviewItems()]);
+      Promise.all([getSuggestions(), getPreview()]);
     }
   }, [isOpenBox, debouncedQuery, pathname]);
 
