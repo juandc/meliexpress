@@ -143,7 +143,7 @@ export const NavBarContainer: FC = () => {
       <SearchBar
         id="search_bar_input"
         type="text"
-        onBlur={onBlur}
+        // onBlur={onBlur}
         inputRef={inputRef}
         value={query}
         placeholder={placeholder}
