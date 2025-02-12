@@ -331,7 +331,7 @@ deciden implementar tests).
 >
 > También hay estados de carga mientras se espera la respuesta de la API durante el primer render server-side de cualquier ruta de la aplicación (e.j. abriendo una nueva pestaña del navegador y entrando directamente a la página de favoritos), esto gracias a las convenciones de React ([Suspense](https://react.dev/reference/react/Suspense)) y Next ([loading.js](https://nextjs.org/docs/app/api-reference/file-conventions/loading)) para hacer streaming ([aquí más información](https://nextjs.org/docs/app/building-your-application/routing/loading-ui-and-streaming)).
 >
-> El único caso donde no se implementó estado de carga durante el streaming del primer render es en la vista de detalle de producto, ya que se priorizó no dar ninguna respuesta hasta tener la información indispensable para la metadata (y al ser el mismo request para toda la información no queda nada más a esperar para mostrar un estado de carga).
+> El único caso donde no se implementó estado de carga durante el streaming del primer render es en la vista de detalle de producto, ya que se priorizó no dar ninguna respuesta hasta tener la información indispensable para la metadata (y al ser el mismo request para toda la información no queda nada más a esperar para mostrar un estado de carga). En este caso se agregó una barra de progreso.
 >
 > - **SearchBar con placeholder dinámico**
 >

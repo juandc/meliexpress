@@ -14,6 +14,7 @@ import {
   useRef,
   useState,
 } from "react";
+import { AppProgressBar as ProgressBar } from 'next-nprogress-bar';
 import { NavBar, SearchBar } from "@/ui/components/isomorphic";
 import esDictionary from "@/ui/dictionaries/es";
 import { useWritingPlaceholder } from "@/ui/hooks/useWritingPlaceholder";
@@ -120,6 +121,12 @@ export const NavBarContainer: FC = () => {
 
   return (
     <NavBar>
+      <ProgressBar
+        height="4px"
+        color="#3483FA"
+        options={{ showSpinner: false }}
+        shallowRouting
+      />
       <Link href="/" onClick={reset} title={esDictionary.shared.navbar.homeLinkTitle}>
         <img
           src="/Logo_ML@2x.png"
