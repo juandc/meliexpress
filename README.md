@@ -1,6 +1,6 @@
-# [MeliExpress](https://meliexpress.vercel.app/)
+# MeliExpress
 
-Clon de MercadoLibre usando React.js y Next.js para buscar, visualizar y guardar (como favoritos) productos.
+Clon de MercadoLibre usando React.js y Next.js para buscar, visualizar y guardar (como favoritos) productos. [Demo aquí](https://meliexpress.vercel.app/).
 
 ## Instrucciones
 
@@ -27,7 +27,7 @@ Para correr las pruebas:
 
 ```bash
 npm run test:e2e # Pruebas E2E
-npm run test:ui # Pruebas unitarias a los componentes front
+npm run test:ui  # Pruebas unitarias a los componentes front
 npm run test:api # Pruebas unitarias a la API
 ```
 
@@ -40,13 +40,13 @@ Debe desarrollarse un sitio web con las siguientes cuatro pantallas:
 - Debe contener únicamente una barra de búsqueda donde el usuario pueda escribir un término de
 búsqueda. ✅
 
-> ✨ También se agregó un botón para ver la lista de favoritos.
+> ✨ También se agregó un botón para ver la lista de favoritos. Más adelante se detalla la implementación del preview en la barra de búsqueda.
 
 - Al presionar "Enter" o hacer clic en un botón de búsqueda, debe redirigir a la página de resultados.  ✅
 
 - Esta página actúa como la pantalla de inicio de la aplicación. ✅
 
-![Home implementado](https://github.com/user-attachments/assets/9e0c9d79-f2f6-47c6-bfbf-c79c89dcc214)
+![Home implementado](https://github.com/user-attachments/assets/dd8502aa-047d-494e-b291-3e470b2049fd)
 
 ### Página de Resultados de Búsqueda
 
@@ -114,7 +114,7 @@ Las vistas son navegables de manera independiente y cuentan con su propia url:
 
 - Resultados de la búsqueda: `/items?search=` ✅ (como redirect)
 
-> ✨ El path "principal" para los resultados de búsqueda es `/search/{query}`, el path indicado `/items?search={query}` solo hace redirect a `/search/{query}` por agilidad para la implementación.
+> ✨ El path "principal" para los resultados de búsqueda es `/search/{query}`, el path indicado `/items?search={query}` solo hace redirect al path principal por agilidad para la implementación.
 
 - Detalle del producto: `/items/:id`  ✅
 
@@ -253,7 +253,7 @@ Construir los siguientes endpoints para ser utilizados desde las vistas:
 > - Este endpoint debe agregar a favoritos los items que se le envíen. ✅
 > - Idealmente se enviará como input el objeto completo a guardar. ✅
 
-> 👀 Se implementó como fue requerido, pero quedo con la duda de por qué guardar el objeto completo, teniendo así dos las fuentes de información, en vez de guardar solo el ID y completar la información del producto con request a la API de Meli.
+> 👀 Se implementó como fue requerido, pero personalmente tengo la duda de por qué guardar el objeto completo, teniendo así dos las fuentes de información, en vez de guardar solo el ID y completar la información del producto con request a la API de Meli.
 
 - `/api/favorites/get` ✅
 > - Este endpoint debe devolver los productos favoritos guardados en el backend. ✅
@@ -271,9 +271,9 @@ el detalle del producto la api de categoría de producto. ✅
 
 - Accesibilidad (Plus si se implementa correctamente). ✅
 
-> 👀 Aunque no se implementaron pruebas automatizadas ni una auditoría profunda en accesibilidad, sí se hicieron pruebas manuales y con Lighthouse para las consideraciones más generales.
+> 👀 Aunque no se implementaron pruebas automatizadas ni una auditoría profunda en accesibilidad, sí se hicieron pruebas manuales y con Lighthouse para las consideraciones más generales (e.j. con el autocompletado y preview de resultados de la barra de búsqueda para garantizar un correcto funcionamiento incluso si se usa solo con el teclado).
 
-- Por temas de seguridad sería bueno que no se accedan a las API directamente desde el front-end, sino crear una api intermediaria que devuelva la información ✅ (Requerido).
+- Por temas de seguridad sería bueno que no se accedan a las API directamente desde el front-end, sino crear una api intermediaria que devuelva la información (Requerido). ✅
 
 
 ## Tecnologías Permitidas
@@ -285,7 +285,7 @@ el detalle del producto la api de categoría de producto. ✅
 - Se recomienda el uso de herramientas de pruebas como Jest, React Testing Library o similares (si se
 deciden implementar tests).
 
-> ✨ Se usó Next.js con TypeScript tanto para el frontend en React.js como para el backend en Node.js, Jest, Testing Library y Playwright para las pruebas, ningún preprocesador de CSS.
+> ✨ Se usó Next.js con TypeScript tanto para el frontend en React.js como para el backend en Node.js; Jest, Testing Library y Playwright para las pruebas; ningún preprocesador de CSS.
 
 
 ## Notas
@@ -333,13 +333,17 @@ deciden implementar tests).
 >
 > - **SearchBar con placeholder dinámico**
 >
-> En busca de captar la información del usuario e indicarle la primera acción principal que debe realizar (buscar) se implementó un placeholder con efecto de irse escribiendo y borrando con diferentes frases. Para una implementación real se recomendaría medir entre tener o no placeholders dinámicos (subir el número de búsquedas? bajar el churn en la página principal?) para confirmar que sí ayuda a los usuarios en vez de ser realmente una distracción.
+> En busca de captar la información del usuario e indicarle la primera acción principal que debe realizar (buscar) se implementó un placeholder con efecto de irse escribiendo y borrando con diferentes frases. Para una implementación real se recomendaría medir entre tener o no placeholders dinámicos (¿sube el número de búsquedas? ¿baja el churn en la página principal?) para confirmar que sí ayuda a los usuarios en vez de realmente solo ser una distracción.
 >
-> También en la vista de resultados se autocompletó el término buscado (de la url) en la barra de búsqueda.
+> También en la vista de resultados se autocompletó el término buscado (proviniente de la url) en la barra de búsqueda.
+>
+> - **SearchBar con autocompletado y preview de resultados**
+>
+> Se agregó una caja con filtrado de las últimas búsquedas del usuario (en local storage) y algunos resultados de la hipotética búsqueda. Se usó debouncing para evitar requests innecesarios a la API por cada cambio del usuario en el valor del input. Todo se implementó de forma que sea muy fácil para front hacer la migración a otra fuente de datos para recibir las últimas búsquedas.
 >
 > - **Micro-transiciones**
 >
-> Aunque no son animaciones especialmente complejas, se agregaron algunos suaves y sencillos cambios de estilo en diferentes elementos al recibir interacción de los usuarios, principalmente buscando indicar que son elementos clickeables / que causan alguna reacción en la aplicación.
+> Aunque no son animaciones especialmente complejas, se agregaron algunos suaves y sencillos cambios de estilo en diferentes elementos al recibir interacción de los usuarios, principalmente buscando indicar que son elementos clickeables y que por lo tanto causan alguna reacción en la aplicación.
 
 
 ## TODOs (just some notes for myself)
@@ -353,7 +357,7 @@ UI
 - [x] Loading Skeletons
 - [x] Error Handling
 - [x] SEO
-- [ ] UI Tests
+- [x] UI Tests
   - [ ] Pages (wont do, e2e instead)
   - [x] Containers
   - [x] Components
@@ -361,10 +365,10 @@ UI
     - [x] Lighthouse
     - [x] Manual
     - [ ] [Auditoría a profundidad](https://platzi.com/cursos/auditoria-accesibilidad-web/)
-- [ ] Debounce Search Bar Previews
+- [x] Debounce Search Bar Previews
 - [ ] Optimistic UI (favorites delete, abort notification?)
 - [ ] Image Modal
-- [ ] i18n / Tropicalization
+- [ ] i18n / Tropicalization (solo diccionarios por ahora)
 
 API
 
