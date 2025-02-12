@@ -2,6 +2,7 @@ import Link from "next/link";
 import { type ReactNode, type FC } from "react";
 import type { BaseItem } from "@/types";
 import { clipItemTitle, getItemHref } from "@/ui/utils/format";
+import { Price } from "../Price/Price";
 import classes from "./SearchResult.module.css";
 
 type Props = BaseItem & {
@@ -31,14 +32,12 @@ export const SearchResult: FC<Props> = ({
         <div className={classes.SearchResult_data}>
           <div className={classes.SearchResult_dataPrincipal}>
             <div className={classes.SearchResult_dataPrincipalTop}>
-              <p>$ {props.price.amount}</p>
-              {/* TODO: use Intl for price format */}
+              <Price {...props.price} />
               {props.free_shipping && (
                 <img src="/ic_shipping@2x.png" alt="Free Shipping" />
               )}
             </div>
-            {/* TODO: hide mobile title for SE(O) */}
-            <h2 className={classes.SearchResult_title__mobile}>{mobileTitle}</h2>
+            <h2 className={classes.SearchResult_title__mobile} data-nosnippet>{mobileTitle}</h2>
             <h2 className={classes.SearchResult_title__desktop}>{props.title}</h2>
           </div>
           <div className={classes.SearchResult_dataSecondary}>

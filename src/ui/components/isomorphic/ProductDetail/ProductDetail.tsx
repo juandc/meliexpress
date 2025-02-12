@@ -1,6 +1,7 @@
 import { type ReactNode, type FC } from "react";
 import type { DetailedItem } from "@/types";
 import { Button } from "../Button/Button";
+import { Price } from "../Price/Price";
 import classes from "./ProductDetail.module.css";
 
 type Props = DetailedItem & {
@@ -24,8 +25,7 @@ export const ProductDetail: FC<Props> = ({
           <span>{props.sold_quantity} vendidos</span>
         </p>
         <h1 className={classes.ProductDetail_title}>{props.title}</h1>
-        {/* TODO: missing decimal styles */}
-        <p className={classes.ProductDetail_price}>$ {props.price.amount}</p>
+        <Price {...props.price} className={classes.ProductDetail_price} />
         <Button>Comprar</Button>
         {additionalDataEl}
       </div>

@@ -140,10 +140,14 @@
   flex-direction: column;
   gap: .25rem;
 }
-.Preview_item span:first-child {
+.Preview_item p:first-child {
   font-size: 16px;
 }
-.Preview_item span:last-child {
+.Preview_item p:last-child {
   font-size: 12px;
   padding-bottom: .5rem;
+}
+.Preview_item p small {
+  color: var(--gray-dark-02);
+  vertical-align: top;
 }

@@ -4,9 +4,10 @@ import Link from "next/link";
 import { type FocusEventHandler, type ComponentProps, type FC } from "react";
 import type { BaseItem } from "@/types";
 import esDictionary from "@/ui/dictionaries/es";
-import { InputBar } from "@/ui/components/isomorphic";
-import classes from "./SearchBar.module.css";
 import { clipItemTitle, getItemHref } from "@/ui/utils/format";
+import { InputBar } from "../InputBar/InputBar";
+import { Price } from "../Price/Price";
+import classes from "./SearchBar.module.css";
 
 type InputBarProps = ComponentProps<typeof InputBar>;
 type InputOmitProps = "onBlur" | "onChange" | "onClick" | "autoComplete";
@@ -105,8 +106,8 @@ export const SearchBar: FC<Props> = ({
                   <img src={item.picture} alt={item.title} />
                 </figure>
                 <div>
-                  <span>{clipItemTitle(item.title)}</span>
-                  <span>$ {item.price.amount}</span>
+                  <p>{clipItemTitle(item.title)}</p>
+                  <Price {...item.price} />
                 </div>
               </Link>
             ))}

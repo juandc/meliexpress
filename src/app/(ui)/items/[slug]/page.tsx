@@ -11,7 +11,6 @@ type NextProps = {
 export default async function ItemPage(props: NextProps) {
   const { slug } = await props.params;
   const id = getIdFromSlug(slug);
-  // TODO: different flows for server and client side
   const { data } = await getItem(id);
   if (!data) notFound();
 

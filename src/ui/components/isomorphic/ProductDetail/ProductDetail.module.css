@@ -60,6 +60,10 @@
   font-weight: 400;
   margin-bottom: 1.25rem;
 }
+.ProductDetail_price small {
+  color: var(--gray-dark-02);
+  vertical-align: top;
+}
 .ProductDetail_data button {
   width: 100%;
 }

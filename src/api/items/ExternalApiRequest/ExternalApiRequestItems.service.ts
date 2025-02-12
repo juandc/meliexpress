@@ -14,13 +14,16 @@ export class ExternalApiRequestItemsService extends ItemsEntity {
   }
 
   private _transformBaseItem(originalItem: any): BaseItem {
+    const price = originalItem.price.toFixed(2);
+    const amount = Math.floor(originalItem.price);
+    const decimals = price - amount;
     const item: BaseItem = {
       id: originalItem.id,
       title: originalItem.title,
       price: {
         currency: originalItem.currency_id,
-        amount: originalItem.price,
-        decimals: originalItem.price, // TODO: ??
+        amount,
+        decimals,
       },
       picture: originalItem.thumbnail,
       condition: originalItem.condition,
@@ -36,7 +39,7 @@ export class ExternalApiRequestItemsService extends ItemsEntity {
     const detailedItem: DetailedItem = {
       ...baseItem,
       address_state: baseItem.address_state ?? originalItem.seller_address.state.name ?? undefined,
-      sold_quantity: originalItem.initial_quantity, // TODO: ??
+      sold_quantity: originalItem.initial_quantity / 2, // TODO: where is / how to calculate sold_quantity?
       description: dataDesc.plain_text,
     };
     return detailedItem;
