@@ -1,11 +1,11 @@
 import { renderHook, act, waitFor } from '@testing-library/react';
-import { usePlaceholder } from './usePlaceholder';
+import { useWritingPlaceholder } from './useWritingPlaceholder';
 
 jest.useFakeTimers();
 
-describe('usePlaceholder', () => {
+describe('useWritingPlaceholder', () => {
   it('should return the initial character of the first sentence', async () => {
-    const { result } = renderHook(() => usePlaceholder({
+    const { result } = renderHook(() => useWritingPlaceholder({
       placeholders: ['Hello', 'World'],
       shouldMove: true,
       speed: 1,
@@ -19,7 +19,7 @@ describe('usePlaceholder', () => {
   });
 
   it('should update the character index over time', async () => {
-    const { result } = renderHook(() => usePlaceholder({
+    const { result } = renderHook(() => useWritingPlaceholder({
       placeholders: ['Hello', 'World'],
       shouldMove: true,
       speed: 1,
@@ -52,7 +52,7 @@ describe('usePlaceholder', () => {
   });
 
   it('should move to the next sentence after the final sentence wait', async () => {
-    const { result } = renderHook(() => usePlaceholder({
+    const { result } = renderHook(() => useWritingPlaceholder({
       placeholders: ['Hello', 'World'],
       shouldMove: true,
       speed: 1,

@@ -3,28 +3,36 @@
 "use client";
 
 import Link from "next/link";
-import { useRouter } from "next/navigation";
+import { usePathname, useRouter } from "next/navigation";
 import {
   type ChangeEventHandler,
   type FC,
   type FocusEventHandler,
   type KeyboardEvent,
+  useEffect,
+  useMemo,
   useRef,
   useState,
 } from "react";
 import { NavBar, SearchBar } from "@/ui/components/isomorphic";
-import { itemMock } from "@/mocks/itemMock";
+// import { itemMock } from "@/mocks/itemMock";
 import esDictionary from "@/ui/dictionaries/es";
+import { getLsSuggestions, saveLsSuggestions } from "@/ui/services/client-only/suggestions";
+import { useDebounce } from "@/ui/hooks/useDebounce";
+import { useWritingPlaceholder } from "@/ui/hooks/useWritingPlaceholder";
 import { getQueryFromUrl } from "./utils";
-import { usePlaceholder } from "./usePlaceholder";
 
 export const NavBarContainer: FC = () => {
+  const pathname = usePathname();
   const router = useRouter();
   const [query, setQuery] = useState(getQueryFromUrl);
+  const debouncedQuery = useDebounce(query.trim(), 300);
+  const realQuery = debouncedQuery.trim();
   const [isOpenBox, setIsOpenBox] = useState(false);
-  const placeholder = usePlaceholder({
+  const [suggestions, setSuggestions] = useState<string[]>([]);
+  const placeholder = useWritingPlaceholder({
     placeholders: esDictionary.shared.navbar.placeholders,
-    shouldMove: query.length <= 0,
+    shouldMove: query.trim().length <= 0,
   });
 
   const inputRef = useRef<HTMLInputElement | null>(null);
@@ -34,8 +42,18 @@ export const NavBarContainer: FC = () => {
     setQuery("");
   };
 
+  const getSuggestions = async () => {
+    const storedSuggestions = await getLsSuggestions(realQuery);
+    setSuggestions(storedSuggestions);
+  };
+
+  const saveSuggestions = async (suggestion: string) => {
+    await saveLsSuggestions(suggestion);
+  };
+
   const navigateToSearchResults = () => {
     if (query.length) {
+      saveSuggestions(query);
       setIsOpenBox(false);
       router.push(`/items?search=${query}`);
       btnRef.current?.focus();
@@ -75,23 +93,32 @@ export const NavBarContainer: FC = () => {
     }
   };
 
-  const boxProps = {
-    suggestions: {
-      options: `${query}-1, ${query}-2, ${query}-3`.split(", "),
-      onSelect: (option: string) => {
-        setQuery(option)
-        if (typeof window !== "undefined") {
-          inputRef.current?.focus();
-        }
+  const boxProps = useMemo(() => {
+    const options = query.trim().length ? suggestions.filter((sug) => sug.includes(query.trim())) : suggestions;
+    return {
+      suggestions: {
+        options,
+        onSelect: (option: string) => {
+          setQuery(option);
+          if (typeof window !== "undefined") {
+            inputRef.current?.focus();
+          }
+        },
       },
-    },
-    preview: {
-      items: [itemMock.item],
-      onClick: () => {
-        setIsOpenBox(false);
+      preview: {
+        items: [], // TODO: fetch 2 items from API to preview
+        onClick: () => {
+          setIsOpenBox(false);
+        },
       },
-    },
-  };
+    };
+  }, [suggestions, query.trim()]);
+
+  useEffect(() => {
+    if (isOpenBox) {
+      getSuggestions();
+    }
+  }, [isOpenBox, realQuery, pathname]);
 
   return (
     <NavBar>

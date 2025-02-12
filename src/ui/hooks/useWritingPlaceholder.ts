@@ -7,7 +7,7 @@ type Props = {
   finalSentenceWait?: number;
 };
 
-export const usePlaceholder = ({
+export const useWritingPlaceholder = ({
   placeholders,
   shouldMove = true,
   speed = 100,

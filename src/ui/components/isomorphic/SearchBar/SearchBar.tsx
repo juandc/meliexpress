@@ -62,9 +62,9 @@ export const SearchBar: FC<Props> = ({
     />
 
     {(preview || suggestions) && (
-      <div className={classes.SearchBar_box}>
+      <div className={classes.SearchBar_box} data-testid="searchbar-box">
         {suggestions && (
-          <div className={classes.Suggestions}>
+          <div className={classes.Suggestions} data-testid="searchbar-suggestions">
             {suggestions.options.map((opt) => (
               <button
                 key={opt}
@@ -77,11 +77,11 @@ export const SearchBar: FC<Props> = ({
               >
                 {!props.value && opt}
 
-                {props.value && opt.includes(`${props.value}`) && (
+                {props.value && opt.includes(`${props.value}`.trim()) && (
                   <>
-                    {opt.slice(0, opt.indexOf(`${props.value}`))}
-                    <b>{`${props.value}`}</b>
-                    {opt.slice(opt.indexOf(`${props.value}`) + `${props.value}`.length)}
+                    {opt.slice(0, opt.indexOf(`${props.value}`.trim()))}
+                    <b>{`${props.value}`.trim()}</b>
+                    {opt.slice(opt.indexOf(`${props.value}`.trim()) + `${props.value}`.trim().length)}
                   </>
                 )}
               </button>
@@ -90,7 +90,7 @@ export const SearchBar: FC<Props> = ({
         )}
 
         {preview && (
-          <div className={classes.Preview}>
+          <div className={classes.Preview} data-testid="searchbar-preview">
             {preview.items.map((item, index) => (
               <Link
                 key={index}

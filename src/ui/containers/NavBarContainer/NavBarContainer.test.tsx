@@ -1,23 +1,45 @@
 import "@testing-library/jest-dom";
 import { render, screen, fireEvent } from "@testing-library/react";
-import { useRouter } from "next/navigation";
-import { itemMock } from "@/mocks/itemMock";
+import { usePathname, useRouter } from "next/navigation";
+import { act } from "react";
 import { NavBarContainer } from "./NavBarContainer";
 import esDictionary from "@/ui/dictionaries/es";
 
 const navCopys = esDictionary.shared.navbar;
 
+jest.useFakeTimers();
+
 jest.mock("next/navigation", () => ({
   useRouter: jest.fn(),
+  usePathname: jest.fn(),
 }));
 
 describe("NavBarContainer", () => {
   const mockPush = jest.fn();
+  const setItemMock = jest.fn();
+  const getItemMock = jest.fn();
+
+  beforeAll(() => {
+    Object.defineProperty(window, 'localStorage', {
+      configurable: true,
+      value: {
+        setItem: jest.fn(),
+        getItem: jest.fn(),
+        removeItem: jest.fn()
+      },
+    });
+  });
+
   beforeEach(() => {
+    (usePathname as jest.Mock).mockReturnValue("/");
     (useRouter as jest.Mock).mockReturnValue({ push: mockPush });
+    localStorage.setItem = setItemMock;
+    localStorage.getItem = getItemMock;
   });
 
   afterEach(() => {
+    setItemMock.mockRestore();
+    getItemMock.mockRestore();
     jest.clearAllMocks();
   });
 
@@ -51,6 +73,7 @@ describe("NavBarContainer", () => {
     });
     expect(favoritesLink).toHaveAttribute("href", "/favorites");
   });
+
 
   it("clicking the button does nothing if input value is empty", () => {
     render(<NavBarContainer />);
@@ -88,59 +111,115 @@ describe("NavBarContainer", () => {
     expect(input).toHaveValue("");
   });
 
-  it("displays suggestions when typing in the search input", () => {
+
+  it("saves query in localstorage after searching btn click", async () => {
+    render(<NavBarContainer />);
+    const query = "test";
+    const input = screen.getByRole("textbox");
+    fireEvent.change(input, { target: { value: query } });
+    fireEvent.click(screen.getByTitle(navCopys.searchBtnTitle));
+    await act(async () => jest.advanceTimersByTime(2000));
+    expect(localStorage.getItem).toHaveBeenCalledWith("suggestions");
+    expect(localStorage.setItem).toHaveBeenCalledWith("suggestions", expect.stringContaining(query));
+  });
+
+  it("doesnt displays suggestions when focus (first time)", async () => {
     render(<NavBarContainer />);
     const input = screen.getByRole("textbox");
-    fireEvent.change(input, { target: { value: "test" } });
-    const suggestion = screen.getByTitle("test-1");
+    fireEvent.focus(input);
+    await act(async () => jest.advanceTimersByTime(2000));
+    const suggestionsContainer = screen.queryByTestId("searchbar-suggestions");
+    expect(suggestionsContainer?.children).toHaveLength(0);
+  });
+
+  it("displays default suggestions when focus (not first time)", async () => {
+      getItemMock.mockImplementation(() => "first test");
+      render(<NavBarContainer />);
+      const input = screen.getByRole("textbox");
+      fireEvent.focus(input);
+      await act(async () => jest.advanceTimersByTime(2000));
+      const suggestionsContainer = screen.getByTestId("searchbar-suggestions");
+      expect(suggestionsContainer).toBeInTheDocument();
+      const suggestion = screen.getByTitle("first test");
+      expect(suggestion).toBeInTheDocument();
+  });
+
+  it("displays suggestions when typing (not first time)", async () => {
+    getItemMock.mockImplementation(() => "first test");
+    render(<NavBarContainer />);
+    const query = "test";
+    const input = screen.getByRole("textbox");
+    fireEvent.change(input, { target: { value: query } });
+    await act(async () => jest.advanceTimersByTime(2000));
+    const suggestionsContainer = screen.getByTestId("searchbar-suggestions");
+    expect(suggestionsContainer).toBeInTheDocument();
+    const suggestion = screen.getByTitle("first test");
     expect(suggestion).toBeInTheDocument();
   });
 
-  it("selects a suggestion when clicking on it", () => {
+  it("doesnt displays suggestions when not matching previously saved", async () => {
+    getItemMock.mockImplementation(() => "otra cosa");
     render(<NavBarContainer />);
+    const query = "test";
     const input = screen.getByRole("textbox");
-    fireEvent.change(input, { target: { value: "test" } });
-    fireEvent.click(screen.getByTitle("test-1"));
-    expect(input).toHaveValue("test-1");
+    fireEvent.change(input, { target: { value: query } });
+    await act(async () => jest.advanceTimersByTime(2000));
+    const suggestionsContainer = screen.getByTestId("searchbar-suggestions");
+    expect(suggestionsContainer).toBeInTheDocument();
+    expect(suggestionsContainer?.children).toHaveLength(0);
   });
 
-  it("displays preview items when typing in the search input", () => {
+  it("selects a suggestion when clicking on it", async () => {
+    getItemMock.mockImplementation(() => "first test");
     render(<NavBarContainer />);
     const input = screen.getByRole("textbox");
-    fireEvent.change(input, { target: { value: "test" } });
-    expect(screen.getByTitle(itemMock.item.title)).toBeInTheDocument();
+    fireEvent.focus(input);
+    await act(async () => jest.advanceTimersByTime(2000));
+    const suggestion = screen.getByTitle("first test");
+    fireEvent.click(suggestion);
+    expect(input).toHaveValue("first test");
   });
 
-  it("focuses input when a suggestion is selected", () => {
+  it("focuses input when a suggestion is selected", async () => {
+    getItemMock.mockImplementation(() => "first test");
     render(<NavBarContainer />);
     const input = screen.getByRole("textbox");
-    fireEvent.change(input, { target: { value: "test" } });
-    fireEvent.click(screen.getByTitle("test-1"));
+    fireEvent.focus(input);
+    await act(async () => jest.advanceTimersByTime(2000));
+    const suggestion = screen.getByTitle("first test");
+    fireEvent.click(suggestion);
     expect(input).toHaveFocus();
   });
 
-  it("blurs input when Escape key is pressed", () => {
+  it("blurs input when Escape key is pressed", async () => {
     render(<NavBarContainer />);
     const input = screen.getByRole("textbox");
-    fireEvent.change(input, { target: { value: "test" } });
+    fireEvent.focus(input);
+    await act(async () => jest.advanceTimersByTime(2000));
     fireEvent.keyDown(input, { key: "Escape" });
     expect(input).not.toHaveFocus();
   });
 
-  it("keeps suggestions box open when focusing on a suggestion", () => {
+  it("keeps suggestions box open when focusing on a suggestion", async () => {
+    getItemMock.mockImplementation(() => "first test");
     render(<NavBarContainer />);
     const input = screen.getByRole("textbox");
-    fireEvent.change(input, { target: { value: "test" } });
-    const suggestion = screen.getByTitle("test-1");
+    fireEvent.focus(input);
+    await act(async () => jest.advanceTimersByTime(2000));
+    const suggestion = screen.getByTitle("first test");
     fireEvent.focus(suggestion);
-    expect(suggestion).toBeInTheDocument();
+    const suggestionsContainer = screen.getByTestId("searchbar-suggestions");
+    expect(suggestionsContainer).toBeInTheDocument();
   });
 
-  it("closes suggestions box when blurring from input", () => {
+  it("closes suggestions box when blurring from input", async () => {
+    getItemMock.mockImplementation(() => "first test");
     render(<NavBarContainer />);
     const input = screen.getByRole("textbox");
-    fireEvent.change(input, { target: { value: "test" } });
+    fireEvent.focus(input);
+    await act(async () => jest.advanceTimersByTime(2000));
     fireEvent.blur(input);
-    expect(screen.queryByTitle("test-1")).not.toBeInTheDocument();
+    const suggestionsContainer = screen.queryByTestId("searchbar-suggestions");
+    expect(suggestionsContainer).not.toBeInTheDocument();
   });
 });
