@@ -37,9 +37,10 @@ export const NavBarContainer: FC = () => {
     getSuggestions,
     saveSuggestions,
   } = useSuggestions(debouncedQuery);
-  // const [suggestions, setSuggestions] = useState<string[]>([]);
-  const { previewItems, getPreviewItems } = usePreviewItems(debouncedQuery);
-  // const [previewItems, setPreviewItems] = useState<BaseItem[]>([]);
+  const {
+    previewItems,
+    getPreviewItems,
+  } = usePreviewItems(debouncedQuery);
 
   const inputRef = useRef<HTMLInputElement | null>(null);
   const btnRef = useRef<HTMLButtonElement | null>(null);
@@ -47,21 +48,6 @@ export const NavBarContainer: FC = () => {
   const reset = () => {
     setQuery("");
   };
-
-  // const getSuggestions = async () => {
-  //   const storedSuggestions = await getLsSuggestions(debouncedQuery);
-  //   setSuggestions(storedSuggestions);
-  // };
-
-  // const saveSuggestions = async (suggestion: string) => {
-  //   await saveLsSuggestions(suggestion);
-  // };
-
-  // const getPreview = async () => {
-  //   if (!query.length) return;
-  //   const res = await getSearchResults(debouncedQuery);
-  //   setPreviewItems(res.data.items.slice(0, 2));
-  // };
 
   const navigateToSearchResults = () => {
     if (query.length) {
@@ -118,7 +104,7 @@ export const NavBarContainer: FC = () => {
         },
       },
       preview: {
-        items: previewItems, // TODO: fetch 2 items from API to preview
+        items: previewItems,
         onClick: () => {
           setIsOpenBox(false);
         },
@@ -143,7 +129,7 @@ export const NavBarContainer: FC = () => {
       <SearchBar
         id="search_bar_input"
         type="text"
-        // onBlur={onBlur}
+        onBlur={onBlur}
         inputRef={inputRef}
         value={query}
         placeholder={placeholder}
