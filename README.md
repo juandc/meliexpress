@@ -248,6 +248,8 @@ Construir los siguientes endpoints para ser utilizados desde las vistas:
 >   error: null
 > }
 > ```
+>
+> 👀 El atributo `sold_quantity` realmente solo es la propiedad `initial_quantity` de la respuesta de la API oficial de Mercado Libre dividido entre 2. Buscando entre los endpoints indicados y por internet no encontré cómo obtener o calcular la cantidad de items vendidos. Queda pendiente implementar el valor real.
 
 - `/api/favorites/add` ✅
 > - Este endpoint debe agregar a favoritos los items que se le envíen. ✅
