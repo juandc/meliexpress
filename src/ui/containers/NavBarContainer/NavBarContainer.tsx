@@ -86,7 +86,7 @@ export const NavBarContainer: FC = () => {
       relatedTarget?.getAttribute?.("data-suggestionopt") === "true"
       || relatedTarget?.getAttribute?.("data-previewitem") === "true"
     ) {
-      preventDefault();
+      preventDefault?.();
     } else {
       setIsOpenBox(false);
     }
