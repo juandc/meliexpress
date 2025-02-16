@@ -387,9 +387,9 @@ API
 - [x] API Hardcodeada para Favoritos
 - [x] Some Clean Architecture practices
 - [ ] API Tests
-  - [ ] Endpoint tests
+  - [x] Endpoint tests
     - [x] favorites
-    - [ ] items
+    - [x] items
   - [ ] Service tests
 - [ ] SQLite para guardar Favoritos (?)
 

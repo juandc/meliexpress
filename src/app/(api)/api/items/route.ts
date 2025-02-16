@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import type { NextResponseApi, SearchApi } from "@/types";
+import { isTest } from "@/utils/isEnv";
 import { jsonData, jsonError } from "@/api/jsonApi";
 import { ExternalApiRequestItemsService } from "@/api/items/items.service";
 import { InMemoryFavoritesService } from "@/api/favorites/favorites.service";
@@ -17,8 +18,8 @@ export async function GET(request: NextRequest): Promise<NextResponseApi<SearchA
       return NextResponse.json(jsonError("Not Found"), { status: 404 });
     }
     return NextResponse.json(jsonData({ categories, items }));
-  } catch(error) {
-    console.error(error);
+  } catch (error) {
+    if (!isTest) console.error(error);
     return NextResponse.json(jsonError((error as unknown as Error).message), { status: 500 });
   }
 }

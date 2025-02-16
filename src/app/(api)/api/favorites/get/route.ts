@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { FavoritesApi, NextResponseApi } from "@/types";
+import { isTest } from "@/utils/isEnv";
 import { jsonData, jsonError } from "@/api/jsonApi";
 import { InMemoryFavoritesService } from "@/api/favorites/favorites.service";
 
@@ -8,8 +9,8 @@ export async function GET(): Promise<NextResponseApi<FavoritesApi>> {
     const favoritesService = new InMemoryFavoritesService();
     const favoritesData = favoritesService.getAll();
     return NextResponse.json(jsonData({ items: favoritesData }));
-  } catch(error) {
-    console.error(error);
+  } catch (error) {
+    if (!isTest) console.error(error);
     return NextResponse.json(jsonError((error as unknown as Error).message), { status: 500 });
   }
 }

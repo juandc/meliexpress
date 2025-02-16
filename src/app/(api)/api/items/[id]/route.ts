@@ -1,5 +1,6 @@
 import { type NextRequest, NextResponse } from "next/server";
 import type { NextResponseApi, ItemApi, ItemApiData } from "@/types";
+import { isTest } from "@/utils/isEnv";
 import { jsonData, jsonError } from "@/api/jsonApi";
 import { InMemoryFavoritesService } from "@/api/favorites/favorites.service";
 import { ExternalApiRequestItemsService } from "@/api/items/items.service";
@@ -25,8 +26,8 @@ export async function GET(
       categories,
       item,
     }));
-  } catch(error) {
-    console.error(error);
+  } catch (error) {
+    if (!isTest) console.error(error);
     return NextResponse.json(
       jsonError((error as unknown as Error).message),
       { status: 500 },
