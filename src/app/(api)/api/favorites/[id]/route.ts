@@ -1,4 +1,5 @@
 import { type NextRequest, NextResponse } from "next/server";
+import { isTest } from "@/utils/isEnv";
 import { jsonError } from "@/api/jsonApi";
 import { InMemoryFavoritesService } from "@/api/favorites/favorites.service";
 
@@ -15,7 +16,7 @@ export async function DELETE(
     favoritesService.delete(id);
     return NextResponse.json({ data: null, error: null }, { status: 200 });
   } catch(error) {
-    console.error(error);
+    if (!isTest) console.error(error);
     // TODO: standard CustomError and CustomErrors dict so any service,
     // model or whatever can dispatch any error messages and http status
     // (instead of always status 500)
